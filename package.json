@@ -1,0 +1,26 @@
+{
+  "name": "oshop",
+  "description": "Product list and cart",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unam3/oshop.git"
+  },
+  "scripts": {
+    "deploy": "webpack -p",
+    "compile": "webpack -d"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "pug": "2.0.0-beta6",
+    "pug-loader": "2.3.0",
+    "webpack": "^1.13.1"
+  },
+  "engines": {
+    "node": "5.2.0",
+    "npm": "3.5.2"
+  },
+  "private": true
+}

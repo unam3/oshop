@@ -1,0 +1,16 @@
+doctype html
+html
+    head
+        meta(charset='UTF-8')
+        link(rel='stylesheet', href='../src/css/common.css')
+        block head-add
+    body
+        header(class='flex-grid')
+            img(id='logo', alt='logo')
+            include nav.pug
+            section(id='cart') blah
+        block page
+            section(id="main")
+        footer
+            section(class='copyright') Company name — 2016
+            include nav.pug
