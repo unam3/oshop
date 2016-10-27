@@ -72,5 +72,5 @@ module.exports = {
       "cost": 3752,
       "brand": "Salomon"
     }
-  }
+  ]
 };
