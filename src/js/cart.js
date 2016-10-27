@@ -1,5 +1,4 @@
 var products = require('./products.js');
-var BlueButton = require('./blueButton.js');
 
 function Quantity (props) {
   return <img />
@@ -16,7 +15,7 @@ function ProductsInCart (props) {
       <a href="#">{props.name}</a>
       <div className="orderCost">{props.cost} руб.</div>
       <Quantity />;
-      <a href="#" onClick={deleteFromOrders}>Убрать</a>
+      <a href="#" onClick={deleteFromOrders}>Убрать</a>;
 }
 
 function TotalCost (props) {
@@ -29,8 +28,10 @@ function Form (props) {
     <input name="email" placeholder="Email" />
     <input name="phone_number" placeholder="Телефон" />
     <input name="adress" placeholder="Адрес доставки" />
-    <texterea name="comment" placeholder="Комментарий" />
+    <texterea name="comment" placeholder="Комментарий" />;
 }
+
+var BlueButton = require('./blueButton.js');
 
 Class OrderForm extends React.Component {
   render () {

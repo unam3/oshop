@@ -1,61 +1,73 @@
 module.exports = {
-  "Running Shoes": {
-    "1f3": {
+  "Running Shoes": [
+    {
+      "id": "1f3",
       "name": "Gel",
       "cost": 6600,
       "brand": "Asics"
     },
-    "a3d": {
+    {
+      "id": "a3d",
       "name": "Wave",
       "cost": 5520,
       "brand": "Mizuno"
     },
-    "vs2": {
+    {
+      "id": "d2b",
       "name": "Del Mar",
       "cost": 4930,
       "brand": "Zoot"
     },
-    "v1a": {
+    {
+      "id": "da1",
       "name": "Ruler",
       "cost": 4536,
       "brand": "Mammut"
     },
-    "1cd": {
+    {
+      "id": "1cd",
       "name": "Cabana",
       "cost": 4389,
       "brand": "Puma"
     },
-    "bfq": {
+    {
+      "id": "bca",
       "name": "Runamuck",
       "cost": 4194,
       "brand": "Five Ten"
     },
-    "hgf": {
+    {
+      "id": "hgf",
       "name": "LK Sport",
       "cost": 4314,
       "brand": "Adidas"
     },
-    "1bb": {
+    {
+      "id": "1bb",
       "name": "Patriot 5",
       "cost": 3821,
       "brand": "Asics"
     },
-    "1ba": {
+    {
+      "id": "1ba",
       "name": "Patriot 3",
       "cost": 4821,
       "brand": "Asics"
     },
-    "l4c": {
+    {
+      "id": "l4c",
       "name": "S-Crown GTX",
       "cost": 3497,
       "brand": "Lowa"
     },
-    "13c": {
+    {
+      "id": "13c",
       "name": "S-Crown",
       "cost": 3797,
       "brand": "Lowa"
     },
-    "1b2": {
+    {
+      "id": "1b2",
       "name": "X-Tour",
       "cost": 3752,
       "brand": "Salomon"
