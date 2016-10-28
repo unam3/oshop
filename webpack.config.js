@@ -8,11 +8,11 @@ module.exports = {
         // собирать отдельно в html
         //cart_pug: "pug-loader!./pug/pages/cart.pug",
         //product_list_pug: "pug-loader!./pug/pages/product_list.pug",
-        product_list: "./js/pages/product_list.js",
+        //product_list: "./js/pages/product_list.js",
         cart: "./js/pages/cart.js"
     },
     output: {
-        path: path.join(__dirname, 'public', 'js'),
+        path: path.join(__dirname, 'build', 'js'),
         filename: '[name].js'
     },
     module: {
