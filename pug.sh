@@ -1,3 +1,3 @@
 #!/bin/bash
-node cart.js > build/cart.htm;
-node product_list.js > build/product_list.htm
+node cart.js > build/html/cart.htm;
+node product_list.js > build/html/product_list.htm
