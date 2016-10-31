@@ -41,28 +41,35 @@ function Filter(props) {
 
 class Filters extends React.Component {
   render () {
+    
+    // приводить все в исходное состояние руками или запоминать его при
+    // componentDidMount?
+    //var cancel = function () {}
     return (
-      <section className="filters">
+      <section className="filters flex-row">
         <CostFilter products={this.props.products} />
         <BrandFilter products={this.props.products} />
         <input type="button" value="Применить" />
-        <a href="#">Сбросить</a>
+        <a href="#"
+          //onClick={cancel}
+          >Сбросить</a>
       </section>
     );
   }
 }
 
 function Product(props) {
-  return (<div>
-      <img />
+  return (<div className="product flex-grid">
+      <img className="product__preview product-list-product-preview" />
       <a href="#">{props.name}</a>
-      <div className="">{props.cost} руб.</div>
+      <div className="product__cost">{props.cost} руб.</div>
       <BlueButton text="В корзину" fobj={{f: props.f}} />
     </div>);
 }
 
 function ShowMoreProducts(props) {
-  return <a href="#" onClick={() => alert("composeProducts(6)")}>
+  return <a href="#" className="show-more"
+    onClick={() => alert("composeProducts(6)")}>
       Показать еще 6 товаров
     </a>;
 }
@@ -74,11 +81,13 @@ class ProductTable extends React.Component {
       alert("Добавено в корзину");
     };
 
-    return <div>
-        <h1>{this.props.productsCategory}</h1>
-        <section>
+    return <div className="products-table">
+        <h1 className="products-table__title">{this.props.productsCategory}</h1>
+        <section className="products-table__table flex-row">
           {this.props.products.map((product) =>
-            <Product key={product.id} id={product.id} name={product.name} cost={product.cost} f={addToCart} />
+            <Product key={product.id}
+              id={product.id} name={product.name} cost={product.cost}
+              f={addToCart} />
           )}
         </section>
         <ShowMoreProducts />
@@ -90,7 +99,7 @@ var productsCategory = Object.keys(products)[0],
     productsList = products[productsCategory];
 
 require("react-dom").render(
-  <div>
+  <div className="flex-grid">
     <Filters products={productsList} />
     <ProductTable products={productsList} category={productsCategory} />
   </div>,

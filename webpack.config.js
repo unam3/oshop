@@ -1,6 +1,5 @@
 var path = require('path')
 
-
 module.exports = {
     debug: true,
     context: path.join(__dirname, 'src'),
@@ -8,7 +7,7 @@ module.exports = {
         // собирать отдельно в html
         //cart_pug: "pug-loader!./pug/pages/cart.pug",
         //product_list_pug: "pug-loader!./pug/pages/product_list.pug",
-        //product_list: "./js/pages/product_list.js",
+        product_list: "./js/pages/product_list.js",
         cart: "./js/pages/cart.js"
     },
     output: {

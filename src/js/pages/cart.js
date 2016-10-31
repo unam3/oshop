@@ -14,35 +14,36 @@ function ProductsInCart(props) {
   function deleteFromOrders() {
   };
 
-  return <div className="productsInCart flex-grid">
-      {props.cart.map((product) => <div key={product.id}>
-        <img />
+  return <div className="products-in-cart flex-row flex-children">
+      {props.cart.map((product) => <div className="product" key={product.id}>
+        <img className="product__preview cart-product-preview" />
         <div>
-          <a href="#">{product.name}</a>
+          <a href="#" className="product__link blue-text">{product.name}</a>
         </div>
-        <div className="orderCost">{product.cost} руб.</div>
+        <div className="product__cost">{product.cost} руб.</div>
         <Quantity />
-        <a href="#" className="dotted" onClick={deleteFromOrders}>Убрать</a>
+        <a href="#" className="product__delete-from-cart-button blue-text"
+          onClick={deleteFromOrders}>Убрать</a>
       </div>)}
     </div>;
 }
 
 function TotalCost(props) {
   const totalCost = props.cart.reduce((totalCost, product) => totalCost + product.cost, 0);
-  return <div className="totalCost">Итого: {totalCost} руб.</div>;
+  return <div className="total-cost">Итого: {totalCost} руб.</div>;
 }
 
 function Form(props) {
   var order = function (args) {
     alert("оформили");
   };
-  return <form>
+  return <form className="order-form flex-row">
       <input name="name" placeholder="Ваше имя" required />
       <input name="email" placeholder="Email" required />
       <input name="phone_number" placeholder="Телефон" required />
       <input name="adress" placeholder="Адрес доставки" required />
       <textarea name="comment" placeholder="Комментарий" required />
-      <BlueButton text="Оформить заказ" fobj={{f: order}} />
+      <BlueButton text="Оформить заказ" additionalClasses="order" />
     </form>;
 }
 
@@ -59,7 +60,7 @@ class OrderForm extends React.Component {
         productsList = products[productsCategory],
         cart = productsList.slice(0, 3);
 
-    return <div>
+    return <div className="cart-order flex-row">
         <h1>Оформление заказа</h1>
         <ProductsInCart cart={cart} />
         <TotalCost cart={cart} />
