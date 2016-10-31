@@ -3,9 +3,9 @@ const React = require("react"),
     BlueButton = require('../blueButton.js');
 
 function Quantity(props) {
-  return <div>
+  return <div className="product__element">
       <img />
-      <input type="number" min="1" defaultValue="1" />
+      <input className="quantity" type="number" min="1" defaultValue="1" />
       <img />
     </div>;
 }
@@ -15,16 +15,15 @@ function ProductsInCart(props) {
   };
 
   return <div className="products-in-cart flex-row flex-children">
-      {props.cart.map((product) => <div className="product" key={product.id}>
-        <img className="product__preview cart-product-preview" />
-        <div>
-          <a href="#" className="product__link blue-text">{product.name}</a>
-        </div>
-        <div className="product__cost">{product.cost} руб.</div>
-        <Quantity />
-        <a href="#" className="product__delete-from-cart-button blue-text"
-          onClick={deleteFromOrders}>Убрать</a>
-      </div>)}
+      {props.cart.map((product) => <div className="product products-in-cart__product padded"
+        key={product.id}>
+          <img className="product__preview product__element cart-product-preview" />
+          <a href="#" className="product__name-link product__element blue-text">{product.name}</a>
+          <div className="product__cost product__element">{product.cost} руб.</div>
+          <Quantity />
+          <a href="#" className="product__delete-from-cart-button product__element blue-text link-wo-underline"
+            onClick={deleteFromOrders}>Убрать</a>
+        </div>)}
     </div>;
 }
 
@@ -42,7 +41,7 @@ function Form(props) {
       <input name="email" placeholder="Email" required />
       <input name="phone_number" placeholder="Телефон" required />
       <input name="adress" placeholder="Адрес доставки" required />
-      <textarea name="comment" placeholder="Комментарий" required />
+      <textarea className="comment-ta" name="comment" placeholder="Комментарий" required />
       <BlueButton text="Оформить заказ" additionalClasses="order" />
     </form>;
 }
@@ -61,7 +60,7 @@ class OrderForm extends React.Component {
         cart = productsList.slice(0, 3);
 
     return <div className="cart-order flex-row">
-        <h1>Оформление заказа</h1>
+        <h1 className="title">Оформление заказа</h1>
         <ProductsInCart cart={cart} />
         <TotalCost cart={cart} />
         <Form />
