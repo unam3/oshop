@@ -1,5 +1,5 @@
 module.exports = {
-  "Running Shoes": [
+  "Беговые кроссовки": [
     {
       "id": "1f3",
       "name": "Gel",

@@ -5,14 +5,19 @@ const React = require("react"),
 function CostFilter(props) {
   // можно с reduce пройти в начале по всем элементам, найти min/max и
   // выставить defaultValue в ComponentDidMount
-  const filter = <div>
-      <input type="number" defaultValue="0" />
-      <div>
+  const filter = <div className="cost-filter flex-row">
+      <input className="cost-filter__part cost-filter__input"
+        type="number" defaultValue="0" />
+      <div className="cost-filter__part">
         —
       </div>
-      <input type="number" defaultValue="1000000" />
+      <input className="cost-filter__part cost-filter__input"
+        type="number" defaultValue="1000000" />
     </div>;
-  return <Filter filterName="Цена" filter={filter} />;
+  return <Filter
+    additionalClasses="filters__cost-filter filters__filter"
+    filterName="Цена"
+    filter={filter} />;
 }
 
 function BrandFilter(props) {
@@ -25,16 +30,22 @@ function BrandFilter(props) {
   })
   var brands = Object.keys(brandsObj);
   return <Filter
+      additionalClasses="filters__brand-filter filters__filter"
       filterName="Бренд"
-      filter={brands.map((brand) => <div key={brand}>
-          <input type="checkbox" /> {brand}
-        </div>)}
+      filter={<div className="filter__brands flex-row">
+          {brands.map((brand) => <div className="brand" key={brand}>
+            <input type="checkbox" /> {brand}
+          </div>)}
+        </div>}
     />;
 }
 
 function Filter(props) {
-  return <div>  
-      <h6>{props.filterName}</h6>
+  let className = "filter";
+  if (props.additionalClasses)
+    className += " " + props.additionalClasses;
+  return <div className={className}>
+      <h6 className="filter__title">{props.filterName}</h6>
       {props.filter}
     </div>
 }
@@ -46,24 +57,32 @@ class Filters extends React.Component {
     // componentDidMount?
     //var cancel = function () {}
     return (
-      <section className="filters flex-row">
+      <section className="filters product-list__filters flex-column">
         <CostFilter products={this.props.products} />
         <BrandFilter products={this.props.products} />
-        <input type="button" value="Применить" />
-        <a href="#"
-          //onClick={cancel}
-          >Сбросить</a>
+        <div className="filters__controls flex-row">
+          <div className="control__wrapper">
+            <input type="button" value="Применить" />
+          </div>
+          <div className="control__wrapper">
+            <a href="#"
+              //onClick={cancel}
+              >Сбросить</a>
+          </div>
+        </div>
       </section>
     );
   }
 }
 
 function Product(props) {
-  return (<div className="product flex-grid">
-      <img className="product__preview product-list-product-preview" />
-      <a href="#">{props.name}</a>
-      <div className="product__cost">{props.cost} руб.</div>
-      <BlueButton text="В корзину" fobj={{f: props.f}} />
+  return (<div className="product product-list__product flex-column">
+      <img className="product__preview product-list__product-preview" />
+      <a href="#" className="product-list__product-link product-list_lmargin blue-text">{props.brand} {props.name}</a>
+      <div className="product-list_lmargin flex-row">
+        <div className="product__cost product-list-cost">{props.cost} руб.</div>
+        <BlueButton additionalClasses="add-to-cart" text="В корзину" fobj={{f: props.f}} />
+      </div>
     </div>);
 }
 
@@ -81,12 +100,12 @@ class ProductTable extends React.Component {
       alert("Добавено в корзину");
     };
 
-    return <div className="products-table">
-        <h1 className="products-table__title">{this.props.productsCategory}</h1>
+    return <div className="products-table product-list_product-table flex-column">
+        <h1 className="products-table__title title">{this.props.productsCategory}</h1>
         <section className="products-table__table flex-row">
           {this.props.products.map((product) =>
             <Product key={product.id}
-              id={product.id} name={product.name} cost={product.cost}
+              id={product.id} brand={product.brand} name={product.name} cost={product.cost}
               f={addToCart} />
           )}
         </section>
@@ -99,9 +118,9 @@ var productsCategory = Object.keys(products)[0],
     productsList = products[productsCategory];
 
 require("react-dom").render(
-  <div className="flex-grid">
+  <div className="product-list main__product-list flex-row">
     <Filters products={productsList} />
-    <ProductTable products={productsList} category={productsCategory} />
+    <ProductTable products={productsList} productsCategory={productsCategory} />
   </div>,
   document.getElementById("main")
 )

@@ -14,12 +14,12 @@ function ProductsInCart(props) {
   function deleteFromOrders() {
   };
 
-  return <div className="products-in-cart flex-row flex-children">
+  return <div className="products-in-cart flex-column flex-children">
       {props.cart.map((product) => <div className="product products-in-cart__product padded"
         key={product.id}>
           <img className="product__preview product__element cart-product-preview" />
-          <a href="#" className="product__name-link product__element blue-text">{product.name}</a>
-          <div className="product__cost product__element">{product.cost} руб.</div>
+          <a href="#" className="product__name-link product__element blue-text">{product.brand} {product.name}</a>
+          <div className="product__cost product__element cart-product-cost">{product.cost} руб.</div>
           <Quantity />
           <a href="#" className="product__delete-from-cart-button product__element blue-text link-wo-underline"
             onClick={deleteFromOrders}>Убрать</a>
@@ -36,7 +36,7 @@ function Form(props) {
   var order = function (args) {
     alert("оформили");
   };
-  return <form className="order-form flex-row">
+  return <form className="order-form flex-column">
       <input name="name" placeholder="Ваше имя" required />
       <input name="email" placeholder="Email" required />
       <input name="phone_number" placeholder="Телефон" required />
@@ -59,7 +59,7 @@ class OrderForm extends React.Component {
         productsList = products[productsCategory],
         cart = productsList.slice(0, 3);
 
-    return <div className="cart-order flex-row">
+    return <div className="cart-order flex-column">
         <h1 className="title">Оформление заказа</h1>
         <ProductsInCart cart={cart} />
         <TotalCost cart={cart} />

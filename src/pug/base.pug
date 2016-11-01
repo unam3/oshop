@@ -5,13 +5,13 @@ html
         link(rel='stylesheet', href='../../src/css/common.css')
         block head-add
     body
-        header(class='flex-grid')
+        header(class='flex-row')
             img(id='logo', alt='logo')
             include nav.pug
-            a(id='cart', class="cart blue-text", href="#") В корзине
+            a(id='cart', class="cart blue-text", href="#") В корзине 10 товаров
         block page
             section(id="main")
-        footer(class='flex-grid')
+        footer(class='flex-row')
             section(class='copyright') Company name — 2016
             include nav.pug
     block scripts
