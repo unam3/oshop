@@ -1,6 +1,7 @@
 const React = require("react"),
     products = require('../products.js'),
-    BlueButton = require('../blueButton.js');
+    BlueButton = require('../blueButton.js'),
+    applyF = require("../applyF.js");
 
 function CostFilter(props) {
   // можно с reduce пройти в начале по всем элементам, найти min/max и
@@ -66,7 +67,10 @@ class Filters extends React.Component {
           </div>
           <div className="control__wrapper">
             <a href="#"
-              //onClick={cancel}
+              onClick={function (e) {
+                e.preventDefault();
+                console.log("reset filters");
+              }}
               >Сбросить</a>
           </div>
         </div>
@@ -81,14 +85,18 @@ function Product(props) {
       <a href="#" className="product-list__product-link product-list_lmargin blue-text">{props.brand} {props.name}</a>
       <div className="product-list_lmargin flex-row">
         <div className="product__cost product-list-cost">{props.cost} руб.</div>
-        <BlueButton additionalClasses="add-to-cart" text="В корзину" fobj={{f: props.f}} />
+        <BlueButton additionalClasses="add-to-cart" text="В корзину"
+          fobj={{f: props.f}} />
       </div>
     </div>);
 }
 
 function ShowMoreProducts(props) {
   return <a href="#" className="show-more"
-    onClick={() => alert("composeProducts(6)")}>
+    onClick={function (e) {
+        e.preventDefault();
+        console.log("show-more");
+      }}>
       Показать еще 6 товаров
     </a>;
 }
@@ -97,16 +105,15 @@ function ShowMoreProducts(props) {
 class ProductTable extends React.Component {
   render () {
     const addToCart = function () {
-      alert("Добавено в корзину");
+      console.log("addToCart");
     };
 
     return <div className="products-table product-list_product-table flex-column">
         <h1 className="products-table__title title">{this.props.productsCategory}</h1>
         <section className="products-table__table flex-row">
           {this.props.products.map((product) =>
-            <Product key={product.id}
-              id={product.id} brand={product.brand} name={product.name} cost={product.cost}
-              f={addToCart} />
+            <Product key={product.id} id={product.id} brand={product.brand}
+              name={product.name} cost={product.cost} f={addToCart} />
           )}
         </section>
         <ShowMoreProducts />

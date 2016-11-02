@@ -11,7 +11,9 @@ function Quantity(props) {
 }
 
 function ProductsInCart(props) {
-  function deleteFromOrders() {
+  function deleteFromOrders(e) {
+      e.preventDefault();
+      console.log("deleteFromOrders");
   };
 
   return <div className="products-in-cart flex-column flex-children">
@@ -33,8 +35,8 @@ function TotalCost(props) {
 }
 
 function Form(props) {
-  var order = function (args) {
-    alert("оформили");
+  const order = function (args) {
+    console.log("оформили");
   };
   return <form className="order-form flex-column">
       <input name="name" placeholder="Ваше имя" required />
@@ -42,7 +44,8 @@ function Form(props) {
       <input name="phone_number" placeholder="Телефон" required />
       <input name="adress" placeholder="Адрес доставки" required />
       <textarea className="comment-ta" name="comment" placeholder="Комментарий" required />
-      <BlueButton text="Оформить заказ" additionalClasses="order" />
+      <BlueButton text="Оформить заказ" additionalClasses="order"
+        fobj={{f: order}} />
     </form>;
 }
 
