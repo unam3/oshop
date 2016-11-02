@@ -1,4 +1,5 @@
 const React = require("react"),
+    ReactDOM = require("react-dom"),
     products = require('../products.js'),
     BlueButton = require('../blueButton.js');
 
@@ -71,7 +72,7 @@ class OrderForm extends React.Component {
   }
 }
 
-require("react-dom").render(
+ReactDOM.render(
   <OrderForm />,
   document.getElementById("main")
 )

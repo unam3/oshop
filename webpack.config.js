@@ -5,10 +5,10 @@ module.exports = {
     context: path.join(__dirname, 'src'),
     entry: {
         // собирать отдельно в html
-        //cart_pug: "pug-loader!./pug/pages/cart.pug",
+        //order_pug: "pug-loader!./pug/pages/order.pug",
         //product_list_pug: "pug-loader!./pug/pages/product_list.pug",
         product_list: "./js/pages/product_list.js",
-        cart: "./js/pages/cart.js"
+        order: "./js/pages/order.js"
     },
     output: {
         path: path.join(__dirname, 'build', 'js'),
