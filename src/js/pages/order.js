@@ -11,31 +11,52 @@ function Quantity(props) {
     </div>;
 }
 
+// DeleteOrderProduct?
+function DeleteFromProducts (props) {
+  return <a href="#" className="product__delete-product-button product__element blue-text link-wo-underline"
+    onClick={(e) => {e.preventDefault(); props.f(props.productId);}}>Убрать</a>
+}
+
+
 class OrderProducts extends React.Component {
   constructor(props) {
     super(props);
     
     this.state = {
-      orderProducts: {}
+      orderProducts: this.props.orderProducts
     };
 
-    this.deleteFromOrder = (e) => {
-      e.preventDefault();
-      console.log("deleteFromOrder");
+    this.deleteFromOrder = (productId) => {
+      //this.setState(function (prvsStt, prps) {
+      //  console.log(prvsStt, prps);
+      //  return prvsStt;
+      //})
+      var orderProducts = JSON.parse(JSON.stringify(this.state.orderProducts));
+      console.log(orderProducts);
+      Object.keys(orderProducts).some(function (k) {
+        if (orderProducts[k] && orderProducts[k].id === productId) {
+          delete orderProducts[k];
+          return true;
+        }
+      });
+      console.log(productId, orderProducts);
+      this.setState(function (prevState) {
+        return {"orderProducts": orderProducts};
+      });
     };
   }
 
-
   render () {
+    const orderProducts = this.state.orderProducts;
+    
     return <div className="order-products flex-column flex-children">
-      {this.props.orderProducts.map((product) => <div className="product order-products__product padded" key={product.id}>
+      {orderProducts.map((product) => product ? (<div className="product order-products__product padded" key={product.id}>
         <img className="product__preview product__element order-product-product-preview" />
         <a href="#" className="product__name-link product__element blue-text">{product.brand} {product.name}</a>
         <div className="product__cost product__element order-product-cost">{product.cost} руб.</div>
         <Quantity />
-        <a href="#" className="product__delete-product-button product__element blue-text link-wo-underline"
-          onClick={this.deleteFromOrder}>Убрать</a>
-      </div>)}
+        <DeleteFromProducts f={this.deleteFromOrder} productId={product.id} />
+      </div>) : null)}
     </div>;
   }
 }
@@ -82,6 +103,11 @@ class Order extends React.Component {
       </div>;
   }
 }
+
+//ReactDOM.render(
+//  <require("../cart.js") />,
+//  document.getElementById("cart")
+//)
 
 ReactDOM.render(
   <Order />,
