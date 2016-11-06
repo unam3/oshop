@@ -11,27 +11,38 @@ function Quantity(props) {
     </div>;
 }
 
-function ProductsInCart(props) {
-  function deleteFromOrders(e) {
-      e.preventDefault();
-      console.log("deleteFromOrders");
-  };
+class OrderProducts extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      orderProducts: {}
+    };
 
-  return <div className="products-in-cart flex-column flex-children">
-      {props.cart.map((product) => <div className="product products-in-cart__product padded"
-        key={product.id}>
-          <img className="product__preview product__element cart-product-preview" />
-          <a href="#" className="product__name-link product__element blue-text">{product.brand} {product.name}</a>
-          <div className="product__cost product__element cart-product-cost">{product.cost} руб.</div>
-          <Quantity />
-          <a href="#" className="product__delete-from-cart-button product__element blue-text link-wo-underline"
-            onClick={deleteFromOrders}>Убрать</a>
-        </div>)}
+    this.deleteFromOrder = (e) => {
+      e.preventDefault();
+      console.log("deleteFromOrder");
+    };
+  }
+
+
+  render () {
+    return <div className="order-products flex-column flex-children">
+      {this.props.orderProducts.map((product) => <div className="product order-products__product padded" key={product.id}>
+        <img className="product__preview product__element order-product-product-preview" />
+        <a href="#" className="product__name-link product__element blue-text">{product.brand} {product.name}</a>
+        <div className="product__cost product__element order-product-cost">{product.cost} руб.</div>
+        <Quantity />
+        <a href="#" className="product__delete-product-button product__element blue-text link-wo-underline"
+          onClick={this.deleteFromOrder}>Убрать</a>
+      </div>)}
     </div>;
+  }
 }
 
 function TotalCost(props) {
-  const totalCost = props.cart.reduce((totalCost, product) => totalCost + product.cost, 0);
+  const totalCost = props.orderProducts.reduce((totalCost, product) => totalCost
+    + product.cost, 0);
   return <div className="total-cost">Итого: {totalCost} руб.</div>;
 }
 
@@ -45,12 +56,12 @@ function Form(props) {
       <input name="phone_number" placeholder="Телефон" required />
       <input name="adress" placeholder="Адрес доставки" required />
       <textarea className="comment-ta" name="comment" placeholder="Комментарий" required />
-      <BlueButton text="Оформить заказ" additionalClasses="order"
+      <BlueButton text="Оформить заказ" additionalClasses="do-order"
         fobj={{f: order}} />
     </form>;
 }
 
-class OrderForm extends React.Component {
+class Order extends React.Component {
   //constructor (props) {
   //  super(props);
 
@@ -61,18 +72,18 @@ class OrderForm extends React.Component {
   render () {
     var productsCategory = Object.keys(products)[0],
         productsList = products[productsCategory],
-        cart = productsList.slice(0, 3);
+        orderProducts = productsList.slice(0, 3);
 
-    return <div className="cart-order flex-column">
+    return <div className="order flex-column">
         <h1 className="title">Оформление заказа</h1>
-        <ProductsInCart cart={cart} />
-        <TotalCost cart={cart} />
+        <OrderProducts orderProducts={orderProducts} />
+        <TotalCost orderProducts={orderProducts} />
         <Form />
       </div>;
   }
 }
 
 ReactDOM.render(
-  <OrderForm />,
+  <Order />,
   document.getElementById("main")
 )
