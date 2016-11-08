@@ -93,30 +93,46 @@ function Product(props) {
 
 function ShowMoreProducts(props) {
   return <a href="#" className="show-more"
-    onClick={function (e) {
-        e.preventDefault();
-        console.log("show-more");
-      }}>
+    onClick={props.onShowMoreProducts}>
       Показать еще 6 товаров
     </a>;
 }
 
 
 class ProductTable extends React.Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
+      products: props.products,
+      productsLoadOffset: 6
+    }
+
+    this.showMoreProducts = (e) => {
+      e.preventDefault();
+      this.setState((prevState) => ({
+        productsLoadOffset: prevState.productsLoadOffset + 6
+      }));
+    }
+
+    this.plo = () => console.log(this.state.productsLoadOffset);
+  }
+
   render () {
     const addToCart = function () {
       console.log("addToCart");
     };
 
     return <div className="products-table product-list_product-table flex-column">
-        <h1 className="products-table__title title">{this.props.productsCategory}</h1>
+        <h1 onClick={this.plo} className="products-table__title title">{this.props.productsCategory}</h1>
         <section className="products-table__table flex-row">
-          {this.props.products.map((product) =>
-            <Product key={product.id} id={product.id} brand={product.brand}
-              name={product.name} cost={product.cost} f={addToCart} />
+          {this.state.products.slice(0, this.state.productsLoadOffset)
+            .map((product) =>
+              <Product key={product.id} id={product.id} brand={product.brand}
+                name={product.name} cost={product.cost} f={addToCart} />
           )}
         </section>
-        <ShowMoreProducts />
+        <ShowMoreProducts onShowMoreProducts={this.showMoreProducts} />
       </div>;
   }
 }
