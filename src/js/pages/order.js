@@ -18,7 +18,7 @@ function Quantity(props) {
 
 function DeleteOrderProduct(props) {
   return <a href="#" className="product__delete-product-button product__element blue-text link-wo-underline"
-    onClick={(e) => {e.preventDefault(); props.f(props.productId);}}>Убрать</a>
+    onClick={(e) => {e.preventDefault(); props.f(props.productId, 0);}}>Убрать</a>
 }
 
 function OrderProducts(props) {
@@ -89,6 +89,8 @@ class Order extends React.Component {
     };
 
     this.deleteFromOrder = (productId) => {
+      if (typeof productId !== "string")
+        debugger;
       var orderProducts = JSON.parse(JSON.stringify(this.state.orderProducts));
       Object.keys(orderProducts).some(function (k) {
         if (orderProducts[k] && orderProducts[k].id === productId) {
@@ -105,16 +107,17 @@ class Order extends React.Component {
       (prevState) => {
         var piq = prevState.productId_quantity,
           products = prevState.orderProducts,
+          product,
           getProduct = function (products, id) {
-            var i = 0,
-                id;
             if (!products.length)
               throw "shi~~";
-            while (true) {
-              if (products[i].id === id)
-                return products[i];
-              i += 1;
-            }
+            products.some((p) => {
+              if (p && p.id === id) {
+                product = p;
+                return true;
+              }
+            });
+            return product;
           };
         //console.log(
         //  JSON.stringify(piq, false, 2),
@@ -125,7 +128,8 @@ class Order extends React.Component {
             (costSum, productId) => {
               console.log(costSum, piq[productId],
                 getProduct(products, productId))
-              return costSum + piq[productId] * getProduct(products, productId).cost;
+              const product = getProduct(products, productId);
+              return costSum + piq[productId] * (product && product.cost || 0);
             },
             0
           )
@@ -151,6 +155,12 @@ class Order extends React.Component {
       this.changeQuantity(id, quantity);
       this.evaluateTotalCost();
     }
+    
+    this.onDeleteFromOrder = (id, quantity) => {
+      this.deleteFromOrder(id);
+      this.changeQuantity(id, quantity);
+      this.evaluateTotalCost();
+    }
   }
   
   componentDidMount() {
@@ -166,7 +176,7 @@ class Order extends React.Component {
     return <div className="order flex-column">
         <h1 className="title">Оформление заказа</h1>
         <OrderProducts orderProducts={this.state.orderProducts}
-          deleteFromOrder={this.deleteFromOrder}
+          deleteFromOrder={this.onDeleteFromOrder}
           onQuantityChange={this.onQuantityChange}
           />
         <TotalCost cost={this.state.totalCost} />

@@ -214,12 +214,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 75 - ((42 * winheight(0) + 31) / 63)
+let s:l = 74 - ((41 * winheight(0) + 31) / 63)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-75
-normal! 023|
+74
+normal! 0
 tabedit tasks
 set splitbelow splitright
 set nosplitright
@@ -463,12 +463,15 @@ silent! normal! zE
 70,88fold
 61,89fold
 61,89fold
-91,102fold
-106,122fold
-123,132fold
-104,134fold
-136,148fold
-150,153fold
+91,104fold
+108,125fold
+126,136fold
+106,138fold
+140,152fold
+154,157fold
+159,163fold
+166,173fold
+175,185fold
 36
 normal! zo
 42
@@ -479,23 +482,19 @@ normal! zo
 normal! zo
 61
 normal! zc
-104
-normal! zo
 106
 normal! zo
-123
+108
 normal! zo
-104
+126
+normal! zo
+106
 normal! zc
-136
-normal! zo
-150
-normal! zo
-let s:l = 171 - ((112 * winheight(0) + 31) / 63)
+let s:l = 175 - ((142 * winheight(0) + 31) / 63)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-171
+175
 normal! 0
 tabedit webpack.config.js
 set splitbelow splitright
@@ -862,7 +861,7 @@ normal! zt
 15
 normal! 025|
 lcd ~/oshop
-tabnext 1
+tabnext 3
 set stal=1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf
