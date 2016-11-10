@@ -40,7 +40,7 @@ function TotalCost(props) {
 }
 
 function Form(props) {
-  const order = function (args) {
+  const checkout = function (args) {
     console.log("оформили");
   };
   return <form className="order-form flex-column">
@@ -49,8 +49,8 @@ function Form(props) {
       <input name="phone_number" placeholder="Телефон" required />
       <input name="adress" placeholder="Адрес доставки" required />
       <textarea className="comment-ta" name="comment" placeholder="Комментарий" required />
-      <BlueButton text="Оформить заказ" additionalClasses="do-order"
-        fobj={{f: order}} />
+      <BlueButton text="Оформить заказ" additionalClasses="checkout"
+        fobj={{f: checkout}} />
     </form>;
 }
 
