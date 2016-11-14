@@ -83,8 +83,12 @@ const React = require("react"),
           <a href="#" className="product-list__product-link product-list_lmargin blue-text">{props.brand} {props.name}</a>
           <div className="product-list_lmargin flex-row">
             <div className="product__cost product-list-cost">{props.cost} руб.</div>
-            <BlueButton additionalClasses="add-to-cart" text="В корзину"
-              fobj={{f: props.f}} />
+            {
+              !props.cart[props.id] && <BlueButton
+                additionalClasses="add-to-cart" text="В корзину"
+                fobj={{f: props.onAddToCart, args: {id: props.id}}}
+                />
+            }
           </div>
         </div>);
     },
@@ -107,8 +111,8 @@ const React = require("react"),
             {props.products.slice(0, props.productsLoadOffset)
               .map((product) =>
                 <Product key={product.id} id={product.id} brand={product.brand}
-                  name={product.name} cost={product.cost}
-                  addToCart={props.onAddToCart} />
+                  name={product.name} cost={product.cost} cart={props.cart}
+                  onAddToCart={props.onAddToCart} />
             )}
           </section>
           <ShowMoreProducts onShowMoreProducts={props.onShowMoreProducts} />
@@ -128,17 +132,29 @@ const React = require("react"),
     productsCategory = Object.keys(products)[0],
     store = require('redux').createStore(require('../reducers/product_list.js'),
       { 
-        cart: {},
+        cart: {
+          "b3d": true,
+          "dbb": true,
+          "bda": true,
+          "1bd": true,
+          "5f3": true,
+          "d61": true,
+          "h3f": true,
+          "5bb": true,
+          "cba": true,
+          "l5c": true
+        },
         // необходимо ли это тут?
         products: products[productsCategory],
         productsLoadOffset: 6
       }
     ),
-    actions = require("../actions/product_list.js"),
+    cart_actions = require("../actions/cart.js"),
+    pl_actions = require("../actions/product_list.js"),
     mapDispatchToProps = function (dispatch) {
       return {
-        onAddToCart: (props) => dispatch(actions.addToCart(props)),
-        onShowMoreProducts: (props) => dispatch(actions.showMore(props))
+        onAddToCart: (props) => dispatch(cart_actions.addToCart(props)),
+        onShowMoreProducts: (props) => dispatch(pl_actions.showMore(props))
       };
     },
     mapStateToProps = function (state) {
@@ -147,17 +163,43 @@ const React = require("react"),
         // необходимо ли это тут?
         // а где еще хранить подгруженные товары?
         products: state.products.slice(0, state.productsLoadOffset),
-        productsLoadOffset: state.productsLoadOffset
+        productsLoadOffset: state.productsLoadOffset,
+        productsCategory: productsCategory
       };
     },
     ConProductList = rr.connect(
       mapStateToProps,
       mapDispatchToProps
-    )(ProductList);
+    )(ProductList),
+    //
+    Cart = function ({cart}) {
+      const productsCount = Object.keys(cart).length;
+      return <div className="cart blue-text">
+        {productsCount ?
+          <a className="blue-text" href="#">
+            {"В корзине " + productsCount + " товаров"}
+          </a>
+            : "Корзина пуста"}
+        </div>;
+    },
+    ConCart = rr.connect(
+      function (state) {
+        return {cart: state.cart};
+      }
+      //mapStateToProps//,
+      //mapDispatchToProps
+    )(Cart);
 
 ReactDOM.render(
   <rr.Provider store={store}>
     <ConProductList />
   </rr.Provider>,
   document.getElementById("main")
+);
+
+ReactDOM.render(
+  <rr.Provider store={store}>
+    <ConCart />
+  </rr.Provider>,
+  document.getElementById("cart")
 );

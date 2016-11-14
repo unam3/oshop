@@ -1,5 +1,4 @@
-const actions = require("../actions/order.js"),
-  deleteFromOrder = function (state, action) {
+const deleteFromOrder = function (state, action) {
     var productId = action.payload.id,
         orderProducts = state && state.slice() || [];
     if (typeof productId !== "string") debugger;
