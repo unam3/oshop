@@ -130,7 +130,11 @@ const React = require("react"),
       };
     },
     Order = function (props) {
-      return <div className="order flex-column">
+      const redirect = function () {
+        setTimeout(() => window.location = "cart", 6000);
+      }
+      return props.orderProducts.some((l) => l !== null) ? (
+        <div className="order flex-column">
           <h1 className="title">Оформление заказа</h1>
           <OrderProducts
             orderProducts={props.orderProducts}
@@ -141,8 +145,12 @@ const React = require("react"),
             orderProducts: props.orderProducts,
             productId_quantity: props.productId_quantity
           }} />
-          <Form />
-        </div>;
+        <Form />
+        </div>)
+      : (redirect(),
+        <div className="empty-order">
+            Заказ пуст, перемещаемся в корзину для составления нового заказа
+        </div>)
     },
     ConOrder = rr.connect(
       mapStateToProps,

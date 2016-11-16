@@ -508,3 +508,8 @@ footer {
 }
 */
 
+.empty-order {
+  margin: 5em auto;
+  text-align: center;
+  font-size: 2em;
+}
