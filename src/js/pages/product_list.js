@@ -3,6 +3,7 @@
 const React = require("react"),
     ReactDOM = require("react-dom"),
     rr = require("react-redux"),
+    Redux = require("redux"),
     products = require('../products.js'),
     BlueButton = require('../blueButton.js'),
     applyF = require("../applyF.js"),
@@ -100,13 +101,15 @@ const React = require("react"),
         </a>;
     },
 
-    ProductTable = function (props) {
-      //plo = () => console.log(props.productsLoadOffset);
+    Ring = function () {
+      return <div className='uil-ring-css'>
+          <div />
+        </div>;
+    },
 
+    ProductTable = function (props) {
       return <div className="products-table product-list_product-table flex-column">
-          <h1
-            //onClick={plo}
-            className="products-table__title title">{props.productsCategory}</h1>
+          <h1 className="products-table__title title">{props.productsCategory}</h1>
           <section className="products-table__table flex-row">
             {props.products.slice(0, props.productsLoadOffset)
               .map((product) =>
@@ -119,18 +122,23 @@ const React = require("react"),
         </div>;
     },
     ProductList = function (props) {
-      return <div className="product-list main__product-list flex-row">
-        <Filters products={props.products} />
-        <ProductTable products={props.products}
-          productsCategory={props.productsCategory}
-          cart={props.cart}
-          onAddToCart={props.onAddToCart}
-          onShowMoreProducts={props.onShowMoreProducts}
-          />
-      </div>;
+      // ~ componentDidMount
+      if (props.products.length === 0 && props.productsLoadOffset === 0) {
+        props.onShowMoreProducts();
+      }
+      return props.products.length ? (
+        <div className="product-list main__product-list flex-row">
+          <Filters products={props.products} />
+          <ProductTable products={props.products}
+            productsCategory={props.productsCategory}
+            cart={props.cart}
+            onAddToCart={props.onAddToCart}
+            onShowMoreProducts={props.onShowMoreProducts}
+            />
+        </div>) : (<Ring />);
     },
     productsCategory = Object.keys(products)[0],
-    store = require('redux').createStore(require('../reducers/product_list.js'),
+    store = Redux.createStore(require('../reducers/product_list.js'),
       { 
         cart: {
           "b3d": true,
@@ -144,34 +152,34 @@ const React = require("react"),
           "cba": true,
           "l5c": true
         },
-        // необходимо ли это тут?
-        products: products[productsCategory],
-        productsLoadOffset: 6
-      }
+        products: [],
+        productsLoadOffset: 0
+      },
+      Redux.applyMiddleware(require("redux-thunk").default)
     ),
     cart_actions = require("../actions/cart.js"),
     pl_actions = require("../actions/product_list.js"),
-    mapDispatchToProps = function (dispatch) {
-      return {
-        onAddToCart: (props) => dispatch(cart_actions.addToCart(props)),
-        onShowMoreProducts: (props) => dispatch(pl_actions.showMore(props))
-      };
-    },
     mapStateToProps = function (state) {
       return {
         cart: state.cart,
-        // необходимо ли это тут?
-        // а где еще хранить подгруженные товары?
-        products: state.products.slice(0, state.productsLoadOffset),
+        products: state.products,
         productsLoadOffset: state.productsLoadOffset,
-        productsCategory: productsCategory
+        productsCategory: productsCategory,
+      };
+    },
+    mapDispatchToProps = function (dispatch) {
+      return {
+        onAddToCart: (props) => dispatch(cart_actions.addToCart(props)),
+        onShowMoreProducts: (props) => {
+          dispatch(pl_actions.showMore());
+          return dispatch(pl_actions.fetchProducts(props));
+        }
       };
     },
     ConProductList = rr.connect(
       mapStateToProps,
       mapDispatchToProps
     )(ProductList),
-    //
     Cart = function ({cart}) {
       const productsCount = Object.keys(cart).length;
       return <div className="cart blue-text">
