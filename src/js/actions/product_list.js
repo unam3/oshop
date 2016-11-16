@@ -5,7 +5,6 @@ module.exports = {
     };
   },
   requestProducts: function (dispatch, getState) {
-    console.log("act_reqP");
     return {
       type: "request_products"
     };
@@ -87,7 +86,6 @@ module.exports = {
       ],
       offsetEnd = state().productsLoadOffset;
 
-    console.log("act_recP");
     return {
       type: "receive_products",
       payload: {
@@ -96,11 +94,9 @@ module.exports = {
     };
   },
   fetchProducts: function (action) {
-    console.log("act_fP");
     return (dispatch, getState) => {
       dispatch(this.requestProducts(dispatch, getState));
       setTimeout(() => dispatch(this.receiveProducts(dispatch, getState)), 2100);
-      console.log("after sT");
       return getState();
     };
   }
