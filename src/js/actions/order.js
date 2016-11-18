@@ -1,4 +1,9 @@
 module.exports = {
+  toggleProcessingOrderStatus: function (action) {
+    return {
+      type: "toggle_processing_status"
+    };
+  },
   deleteFromOrder: function (action) {
     return {
       type: "delete_from_order",

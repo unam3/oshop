@@ -56,8 +56,8 @@ const React = require("react"),
           };
         return Object.keys(piq).reduce(
             (costSum, productId) => {
-              console.log(costSum, piq[productId],
-                getProduct(products, productId))
+              //console.log(costSum, piq[productId],
+              //  getProduct(products, productId))
               const product = getProduct(products, productId);
               return costSum + piq[productId] * (product && product.cost || 0);
             },
@@ -70,17 +70,52 @@ const React = require("react"),
     },
 
     Form = function (props) {
-      const checkout = function (args) {
-        console.log("оформили");
-      };
+      const form = {},
+        processResponse = function (response) {
+          switch (response) {
+            case 200:
+              props.toggleProcessingOrderStatus();
+              console.log("успешно обработали")
+              break;
+            default:
+              debugger;
+          }
+        },
+        checkout = function (props) {
+          props.toggleProcessingOrderStatus();
+          // проверка заполненности формы 
+          let emptyInput;
+          if (Object.keys(form)
+              .every((inputName) => {
+                let v = form[inputName].value,
+                  checkPassed = (v.length !== 0) && /\S/m.test(v);
+                console.log("cp", checkPassed)
+                if (!checkPassed)
+                  emptyInput = form[inputName];
+                return checkPassed; })) {
+            // отправка
+            setTimeout(processResponse, 1000, 200);
+          } else {
+            props.toggleProcessingOrderStatus();
+            emptyInput.focus();
+          }
+        };
       return <form className="order-form flex-column">
-          <input name="name" placeholder="Ваше имя" required />
-          <input name="email" placeholder="Email" required />
-          <input name="phone_number" placeholder="Телефон" required />
-          <input name="adress" placeholder="Адрес доставки" required />
-          <textarea className="comment-ta" name="comment" placeholder="Комментарий" required />
+          <div className="order-form__requirement">
+            Поля ниже необходимо заполнить:
+          </div>
+          <input name="name" ref={(l) => form["name"] = l}
+            placeholder="Ваше имя" required />
+          <input name="email" ref={(l) => form["email"] = l} placeholder="Email"
+            required />
+          <input name="phone_number" ref={(l) => form["phone_number"] = l}
+            placeholder="Телефон" required />
+          <input name="address" ref={(l) => form["address"] = l}
+            placeholder="Адрес доставки" required />
+          <textarea className="comment-ta" ref={(l) => form["comment"] = l}
+            name="comment" placeholder="Комментарий" required />
           <BlueButton text="Оформить заказ" additionalClasses="checkout"
-            fobj={{f: checkout}} />
+            fobj={{f: checkout, args: props}} />
         </form>;
     },
 
@@ -113,49 +148,70 @@ const React = require("react"),
           "1f3": 1,
           "a3d": 1,
           "d2b": 1
-        }
+        },
+        processingOrder: false
       }
     ),
     actions = require("../actions/order.js"),
     mapDispatchToProps = function (dispatch) {
       return {
         onQuantityChange: (props) => dispatch(actions.changeQuantity(props)),
-        onDeleteFromOrder: (props) => dispatch(actions.deleteFromOrder(props))
+        onDeleteFromOrder: (props) => dispatch(actions.deleteFromOrder(props)),
+        toggleProcessingOrderStatus: (props) => dispatch(actions.toggleProcessingOrderStatus(props))
       };
     },
     mapStateToProps = function (state) {
       return {
         orderProducts: state.orderProducts,
-        productId_quantity: state.productId_quantity
+        productId_quantity: state.productId_quantity,
+        processingOrder: state.processingOrder
       };
     },
+    OrderInfo = function (props) {
+     return <div className="order-info">
+            {props.text}
+        </div>;
+    },
     Order = function (props) {
+      return <div className="order flex-column">
+        <h1 className="title">Оформление заказа</h1>
+        <OrderProducts
+          orderProducts={props.orderProducts}
+          onQuantityChange={props.onQuantityChange}
+          onDeleteFromOrder={props.onDeleteFromOrder}
+          />
+        <TotalCost data={{
+          orderProducts: props.orderProducts,
+          productId_quantity: props.productId_quantity
+        }} />
+      <Form productId_quantity={props.productId_quantity}
+        toggleProcessingOrderStatus={props.toggleProcessingOrderStatus} />
+      </div>;
+    },
+    OrderWrapper = function (props) {
       const redirect = function () {
         setTimeout(() => window.location = "cart", 6000);
-      }
-      return props.orderProducts.some((l) => l !== null) ? (
-        <div className="order flex-column">
-          <h1 className="title">Оформление заказа</h1>
-          <OrderProducts
-            orderProducts={props.orderProducts}
-            onQuantityChange={props.onQuantityChange}
-            onDeleteFromOrder={props.onDeleteFromOrder}
-            />
-          <TotalCost data={{
-            orderProducts: props.orderProducts,
-            productId_quantity: props.productId_quantity
-          }} />
-        <Form />
-        </div>)
+      };
+      console.log(props.processingOrder)
+      return props.orderProducts.some((l) => l !== null) ?
+        (props.processingOrder ? 
+          (<OrderInfo text="Обрабатываем заказ" />)
+            : (<Order
+                orderProducts={props.orderProducts}
+                productId_quantity={props.productId_quantity}
+                onQuantityChange={props.onQuantityChange}
+                onDeleteFromOrder={props.onDeleteFromOrder}
+                toggleProcessingOrderStatus={props.toggleProcessingOrderStatus}
+                />
+            ))
       : (redirect(),
-        <div className="empty-order">
-            Заказ пуст, перемещаемся в корзину для составления нового заказа
-        </div>)
+        <OrderInfo
+          text="В форме заказа нет товаров. Перемещаемся в корзину для составления нового заказа" />);
     },
     ConOrder = rr.connect(
       mapStateToProps,
       mapDispatchToProps
-    )(Order);
+    )(OrderWrapper);
 
 ReactDOM.render(
   <rr.Provider store={store}>

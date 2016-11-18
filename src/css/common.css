@@ -508,8 +508,12 @@ footer {
 }
 */
 
-.empty-order {
+.order-info {
   margin: 5em auto;
   text-align: center;
   font-size: 2em;
+}
+
+.order-form__requirement {
+  text-decoration: underline;
 }

@@ -32,9 +32,19 @@ const deleteFromOrder = function (state, action) {
       default:
         return state;
     }
+  },
+  processingOrder = function (state = false, action) {
+    switch (action.type) {
+      case "toggle_processing_status":
+        console.log("processingOrder", state, action)
+        return !state;
+      default:
+        return state;
+    }
   };
 
 module.exports = require('redux').combineReducers({ 
   orderProducts,
-  productId_quantity
+  productId_quantity,
+  processingOrder
 });
