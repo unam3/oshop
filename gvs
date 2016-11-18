@@ -223,11 +223,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 82 - ((16 * winheight(0) + 19) / 39)
+let s:l = 78 - ((24 * winheight(0) + 31) / 63)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-82
+78
 normal! 0
 tabedit tasks
 set splitbelow splitright
@@ -737,14 +737,12 @@ silent! normal! zE
 208,213fold
 141
 normal! zo
-141
-normal! zc
-let s:l = 58 - ((57 * winheight(0) + 31) / 63)
+let s:l = 170 - ((169 * winheight(0) + 31) / 63)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-58
-normal! 0
+170
+normal! 01|
 tabedit src/js/reducers/order.js
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -754,8 +752,8 @@ wincmd w
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 19 + 32) / 65)
-exe '2resize ' . ((&lines * 42 + 32) / 65)
+exe '1resize ' . ((&lines * 36 + 32) / 65)
+exe '2resize ' . ((&lines * 25 + 32) / 65)
 argglobal
 setlocal keymap=
 setlocal noarabic
@@ -866,12 +864,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 46 - ((14 * winheight(0) + 9) / 19)
+let s:l = 49 - ((17 * winheight(0) + 18) / 36)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-46
-normal! 014|
+49
+normal! 061|
 wincmd w
 argglobal
 edit src/js/actions/order.js
@@ -984,15 +982,15 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 2 - ((1 * winheight(0) + 21) / 42)
+let s:l = 5 - ((4 * winheight(0) + 12) / 25)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-2
-normal! 03|
+5
+normal! 029|
 wincmd w
-exe '1resize ' . ((&lines * 19 + 32) / 65)
-exe '2resize ' . ((&lines * 42 + 32) / 65)
+exe '1resize ' . ((&lines * 36 + 32) / 65)
+exe '2resize ' . ((&lines * 25 + 32) / 65)
 tabedit src/js/pages/order.js
 set splitbelow splitright
 set nosplitright
@@ -1112,32 +1110,37 @@ silent! normal! zE
 25,28fold
 30,40fold
 42,70fold
-105,119fold
-72,120fold
-127,146fold
-124,154fold
-156,162fold
-163,169fold
-209,210fold
-191,210fold
+74,87fold
+88,106fold
+107,123fold
+72,124fold
+131,150fold
+128,159fold
+161,168fold
+169,176fold
+177,181fold
+182,198fold
+221,222fold
+199,222fold
+223,226fold
 72
 normal! zo
-105
+128
 normal! zo
-124
-normal! zo
-124
+128
 normal! zc
-191
+199
 normal! zo
-209
+221
 normal! zo
-let s:l = 79 - ((49 * winheight(0) + 31) / 63)
+199
+normal! zc
+let s:l = 177 - ((176 * winheight(0) + 31) / 63)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-79
-normal! 020|
+177
+normal! 01|
 tabedit src/css/common.css
 set splitbelow splitright
 set nosplitright

@@ -41,10 +41,20 @@ const deleteFromOrder = function (state, action) {
       default:
         return state;
     }
+  },
+  serverResponse = function (state = false, action) {
+    switch (action.type) {
+      case "handle_server_response":
+        console.log("srvR", state, action);
+        return action && action.payload && action.payload.statusCode || state;
+      default:
+        return state;
+    }
   };
 
 module.exports = require('redux').combineReducers({ 
   orderProducts,
   productId_quantity,
-  processingOrder
+  processingOrder,
+  serverResponse
 });

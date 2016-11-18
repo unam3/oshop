@@ -1,4 +1,10 @@
 module.exports = {
+  handleServerResponse: function (action) {
+    return {
+      type: "handle_server_response",
+      payload: action.payload
+    };
+  },
   toggleProcessingOrderStatus: function (action) {
     return {
       type: "toggle_processing_status"

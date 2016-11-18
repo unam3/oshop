@@ -75,7 +75,11 @@ const React = require("react"),
           switch (response) {
             case 200:
               props.toggleProcessingOrderStatus();
-              console.log("успешно обработали")
+              props.handleServerResponse({
+                "payload": {
+                  "statusCode": 200
+                }
+              });
               break;
             default:
               debugger;
@@ -149,7 +153,8 @@ const React = require("react"),
           "a3d": 1,
           "d2b": 1
         },
-        processingOrder: false
+        processingOrder: false,
+        serverResponse: false
       }
     ),
     actions = require("../actions/order.js"),
@@ -157,14 +162,16 @@ const React = require("react"),
       return {
         onQuantityChange: (props) => dispatch(actions.changeQuantity(props)),
         onDeleteFromOrder: (props) => dispatch(actions.deleteFromOrder(props)),
-        toggleProcessingOrderStatus: (props) => dispatch(actions.toggleProcessingOrderStatus(props))
+        toggleProcessingOrderStatus: (props) => dispatch(actions.toggleProcessingOrderStatus(props)),
+        handleServerResponse: (props) => dispatch(actions.handleServerResponse(props))
       };
     },
     mapStateToProps = function (state) {
       return {
         orderProducts: state.orderProducts,
         productId_quantity: state.productId_quantity,
-        processingOrder: state.processingOrder
+        processingOrder: state.processingOrder,
+        serverResponse: state.serverResponse
       };
     },
     OrderInfo = function (props) {
@@ -185,25 +192,30 @@ const React = require("react"),
           productId_quantity: props.productId_quantity
         }} />
       <Form productId_quantity={props.productId_quantity}
-        toggleProcessingOrderStatus={props.toggleProcessingOrderStatus} />
+        toggleProcessingOrderStatus={props.toggleProcessingOrderStatus}
+        handleServerResponse={props.handleServerResponse} />
       </div>;
     },
     OrderWrapper = function (props) {
       const redirect = function () {
         setTimeout(() => window.location = "cart", 6000);
       };
-      console.log(props.processingOrder)
+      console.log(props.processingOrder, props.serverResponse)
       return props.orderProducts.some((l) => l !== null) ?
         (props.processingOrder ? 
           (<OrderInfo text="Обрабатываем заказ" />)
-            : (<Order
+            : props.serverResponse === 200 ?
+              // можно редирект в корзину для оформления нового заказа
+              (<OrderInfo text="Заказ успешно отправлен" />)
+              : (<Order
                 orderProducts={props.orderProducts}
                 productId_quantity={props.productId_quantity}
                 onQuantityChange={props.onQuantityChange}
                 onDeleteFromOrder={props.onDeleteFromOrder}
                 toggleProcessingOrderStatus={props.toggleProcessingOrderStatus}
-                />
-            ))
+                handleServerResponse={props.handleServerResponse}
+                />)
+        )
       : (redirect(),
         <OrderInfo
           text="В форме заказа нет товаров. Перемещаемся в корзину для составления нового заказа" />);
