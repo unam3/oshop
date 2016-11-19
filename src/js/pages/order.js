@@ -5,6 +5,7 @@ const React = require("react"),
     rr = require("react-redux"),
     products = require('../products.js'),
     BlueButton = require('../blueButton.js'),
+    Cart = require("../cart.js"),
 
     Quantity = function (props) {
       return <div className="product__element">
@@ -230,4 +231,9 @@ ReactDOM.render(
     <ConOrder />
   </rr.Provider>,
   document.getElementById("main")
-)
+);
+
+ReactDOM.render(
+  <Cart.component cart={Cart.stored} />,
+  document.getElementById("cart")
+);

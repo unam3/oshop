@@ -7,6 +7,7 @@ const React = require("react"),
     products = require('../products.js'),
     BlueButton = require('../blueButton.js'),
     applyF = require("../applyF.js"),
+    Cart = require("../cart.js"),
 
     CostFilter = function (props) {
       // можно с reduce пройти в начале по всем элементам, найти min/max и
@@ -140,18 +141,7 @@ const React = require("react"),
     productsCategory = Object.keys(products)[0],
     store = Redux.createStore(require('../reducers/product_list.js'),
       { 
-        cart: {
-          "b3d": true,
-          "dbb": true,
-          "bda": true,
-          "1bd": true,
-          "5f3": true,
-          "d61": true,
-          "h3f": true,
-          "5bb": true,
-          "cba": true,
-          "l5c": true
-        },
+        cart: Cart.stored,
         products: [],
         productsLoadOffset: 0
       },
@@ -180,23 +170,13 @@ const React = require("react"),
       mapStateToProps,
       mapDispatchToProps
     )(ProductList),
-    Cart = function ({cart}) {
-      const productsCount = Object.keys(cart).length;
-      return <div className="cart blue-text">
-        {productsCount ?
-          <a className="blue-text" href="#">
-            {"В корзине " + productsCount + " товаров"}
-          </a>
-            : "Корзина пуста"}
-        </div>;
-    },
     ConCart = rr.connect(
       function (state) {
         return {cart: state.cart};
       }
       //mapStateToProps//,
       //mapDispatchToProps
-    )(Cart);
+    )(Cart.component);
 
 ReactDOM.render(
   <rr.Provider store={store}>
