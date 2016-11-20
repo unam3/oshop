@@ -82,7 +82,11 @@ const React = require("react"),
     Product = function (props) {
       return (<div className="product product-list__product flex-column">
           <img className="product__preview product-list__product-preview" />
-          <a href="#" className="product-list__product-link product-list_lmargin blue-text">{props.brand} {props.name}</a>
+          <div className="product-list__product-link product-list_lmargin">
+            <a href="#" className="blue-text">
+              {props.brand} {props.name}
+            </a>
+          </div>
           <div className="product-list_lmargin flex-row">
             <div className="product__cost product-list-cost">{props.cost} руб.</div>
             {

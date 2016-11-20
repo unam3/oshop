@@ -32,7 +32,11 @@ const React = require("react"),
       return <div className="order-products flex-column flex-children">
         {props.orderProducts.map((product) => product ? (<div className="product order-products__product padded" key={product.id}>
           <img className="product__preview product__element order-product-product-preview" />
-          <a href="#" className="product__name-link product__element blue-text">{product.brand} {product.name}</a>
+          <div className="product__name-link product__element">
+            <a href="#" className="blue-text">
+              {product.brand} {product.name}
+            </a>
+          </div>
           <div className="product__cost product__element order-product-cost">{product.cost} руб.</div>
           <Quantity onQuantityChange={props.onQuantityChange} productId={product.id} />
           <DeleteOrderProduct f={props.onDeleteFromOrder} productId={product.id} />

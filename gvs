@@ -35,7 +35,7 @@ set splitbelow
 set suffixes=.bak,~,.swp,.o,.info,.aux,.log,.dvi,.bbl,.blg,.brf,.cb,.ind,.idx,.ilg,.inx,.out,.toc,.png,.jpg
 set tabstop=2
 set termencoding=utf-8
-set window=64
+set window=40
 let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
 let v:this_session=expand("<sfile>:p")
 silent only
@@ -94,7 +94,7 @@ badd +6 src/js/pages/order.js
 badd +4 order.js
 badd +2 src/js/reducers/addToCart.js
 badd +6 src/js/reducers/removeFromOrder.js
-badd +8 src/pug/pages/order.pug
+badd +7 src/pug/pages/order.pug
 badd +84 new
 badd +3 src/js/entryPoint.js
 badd +1 src/js/reducers/order.js
@@ -108,7 +108,7 @@ badd +1 src/js/actions/cart.js
 badd +2 build/html/product_list.htm
 badd +24240 build/js/product_list.js
 badd +34 node_modules/babel-plugin-transform-object-assign/README.md
-badd +0 src/resources.js
+badd +1 src/resources.js
 badd +514 build/js/styles.css
 argglobal
 silent! argdel *
@@ -230,7 +230,7 @@ setlocal wrapmargin=0
 silent! normal! zE
 5,17fold
 19,39fold
-let s:l = 74 - ((30 * winheight(0) + 31) / 63)
+let s:l = 74 - ((18 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -351,7 +351,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 502 - ((0 * winheight(0) + 31) / 63)
+let s:l = 502 - ((0 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -472,7 +472,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 21 - ((20 * winheight(0) + 31) / 63)
+let s:l = 21 - ((12 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -593,7 +593,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 20 - ((19 * winheight(0) + 31) / 63)
+let s:l = 20 - ((12 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -608,8 +608,8 @@ wincmd w
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 17 + 32) / 65)
-exe '2resize ' . ((&lines * 44 + 32) / 65)
+exe '1resize ' . ((&lines * 9 + 20) / 41)
+exe '2resize ' . ((&lines * 28 + 20) / 41)
 argglobal
 setlocal keymap=
 setlocal noarabic
@@ -723,7 +723,7 @@ silent! normal! zE
 2,4fold
 2
 normal! zo
-let s:l = 16 - ((9 * winheight(0) + 8) / 17)
+let s:l = 16 - ((5 * winheight(0) + 4) / 9)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -842,15 +842,15 @@ setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
 13,86fold
-let s:l = 99 - ((86 * winheight(0) + 22) / 44)
+let s:l = 99 - ((86 * winheight(0) + 14) / 28)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 99
 normal! 07|
 wincmd w
-exe '1resize ' . ((&lines * 17 + 32) / 65)
-exe '2resize ' . ((&lines * 44 + 32) / 65)
+exe '1resize ' . ((&lines * 9 + 20) / 41)
+exe '2resize ' . ((&lines * 28 + 20) / 41)
 tabedit src/js/pages/product_list.js
 set splitbelow splitright
 set nosplitright
@@ -970,33 +970,33 @@ silent! normal! zE
 30,48fold
 50,58fold
 60,80fold
-82,96fold
-98,103fold
-105,109fold
-111,124fold
-125,140fold
-144,144fold
-142,149fold
-152,159fold
-160,168fold
-169,172fold
-173,179fold
-181,186fold
-188,193fold
-142
+82,100fold
+102,107fold
+109,113fold
+115,128fold
+129,144fold
+148,148fold
+146,153fold
+156,163fold
+164,172fold
+173,176fold
+177,183fold
+185,190fold
+192,197fold
+146
 normal! zo
-144
+148
 normal! zo
-173
+177
 normal! zo
-188
+192
 normal! zo
-let s:l = 7 - ((6 * winheight(0) + 31) / 63)
+let s:l = 88 - ((82 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-7
-normal! 041|
+88
+normal! 01|
 tabedit src/js/cart.js
 set splitbelow splitright
 set nosplitright
@@ -1112,7 +1112,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 31) / 63)
+let s:l = 1 - ((0 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -1235,37 +1235,41 @@ setlocal wrapmargin=0
 silent! normal! zE
 10,24fold
 26,29fold
-31,41fold
-43,71fold
-75,88fold
-89,107fold
-108,124fold
-73,125fold
-132,151fold
-129,160fold
-162,169fold
-170,177fold
-178,182fold
-183,199fold
-222,223fold
-200,223fold
-224,227fold
-73
+31,45fold
+47,75fold
+79,92fold
+93,111fold
+112,128fold
+77,129fold
+136,155fold
+133,164fold
+166,173fold
+174,181fold
+182,186fold
+187,203fold
+226,227fold
+204,227fold
+228,231fold
+31
 normal! zo
-129
+77
 normal! zo
-129
+77
 normal! zc
-200
+133
 normal! zo
-222
+133
+normal! zc
+204
 normal! zo
-let s:l = 25 - ((24 * winheight(0) + 31) / 63)
+226
+normal! zo
+let s:l = 37 - ((12 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-25
-normal! 0
+37
+normal! 016|
 tabedit src/js/reducers/order.js
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -1275,8 +1279,8 @@ wincmd w
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 21 + 32) / 65)
-exe '2resize ' . ((&lines * 40 + 32) / 65)
+exe '1resize ' . ((&lines * 12 + 20) / 41)
+exe '2resize ' . ((&lines * 25 + 20) / 41)
 argglobal
 setlocal keymap=
 setlocal noarabic
@@ -1387,7 +1391,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 39 - ((12 * winheight(0) + 10) / 21)
+let s:l = 39 - ((7 * winheight(0) + 6) / 12)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -1505,15 +1509,15 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 5 - ((4 * winheight(0) + 20) / 40)
+let s:l = 5 - ((3 * winheight(0) + 12) / 25)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 5
 normal! 029|
 wincmd w
-exe '1resize ' . ((&lines * 21 + 32) / 65)
-exe '2resize ' . ((&lines * 40 + 32) / 65)
+exe '1resize ' . ((&lines * 12 + 20) / 41)
+exe '2resize ' . ((&lines * 25 + 20) / 41)
 tabedit webpack.config.js
 set splitbelow splitright
 wincmd _ | wincmd |
@@ -1523,8 +1527,8 @@ wincmd w
 set nosplitright
 wincmd t
 set winheight=1 winwidth=1
-exe '1resize ' . ((&lines * 45 + 32) / 65)
-exe '2resize ' . ((&lines * 16 + 32) / 65)
+exe '1resize ' . ((&lines * 27 + 20) / 41)
+exe '2resize ' . ((&lines * 10 + 20) / 41)
 argglobal
 setlocal keymap=
 setlocal noarabic
@@ -1635,7 +1639,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 42 - ((31 * winheight(0) + 22) / 45)
+let s:l = 42 - ((19 * winheight(0) + 13) / 27)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -1753,15 +1757,15 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 11 - ((4 * winheight(0) + 8) / 16)
+let s:l = 11 - ((3 * winheight(0) + 5) / 10)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 11
 normal! 050|
 wincmd w
-exe '1resize ' . ((&lines * 45 + 32) / 65)
-exe '2resize ' . ((&lines * 16 + 32) / 65)
+exe '1resize ' . ((&lines * 27 + 20) / 41)
+exe '2resize ' . ((&lines * 10 + 20) / 41)
 tabnext 1
 set stal=1
 if exists('s:wipebuf')
