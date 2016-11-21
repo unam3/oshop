@@ -1,3 +1,5 @@
+"use strict";
+
 const addToCart = function (state, action) {
   return state && Object.assign({}, state, {[action.payload.id]: true}) || {};
 };

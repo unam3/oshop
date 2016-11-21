@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = {
   showMore: function (action) {
     return {

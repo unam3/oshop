@@ -1,50 +1,63 @@
 "use strict";
 
 const React = require("react"),
-    ReactDOM = require("react-dom"),
-    rr = require("react-redux"),
+    {render} = require("react-dom"),
+    {connect, Provider} = require("react-redux"),
     products = require('../products.js'),
     BlueButton = require('../blueButton.js'),
     Cart = require("../cart.js"),
 
-    Quantity = function (props) {
-      return <div className="product__element">
-          <img />
-          <input className="quantity"
-            onChange={(e) => {
-              e.preventDefault();
-              props.onQuantityChange({
-                id: props.productId,
-                quantity: parseInt(e.target.value)
-              });
-            }}
-            type="number" min="1" defaultValue="1" />
-          <img />
-        </div>;
-    },
+    Quantity = ({onQuantityChange, productId}) => (
+      <div className="product__element">
+        <img />
+        <input className="quantity"
+          onChange={(e) => {
+            e.preventDefault();
+            onQuantityChange({
+              id: productId,
+              quantity: parseInt(e.target.value)
+            });
+          }}
+          type="number" min="1" defaultValue="1" />
+        <img />
+      </div>
+    ),
 
-    DeleteOrderProduct = function (props) {
-      return <a href="#" className="product__delete-product-button product__element blue-text link-wo-underline"
-        onClick={(e) => {e.preventDefault(); props.f({"id": props.productId});}}>Убрать</a>
-    },
+    DeleteOrderProduct = ({f, productId}) => (
+      <a href="#" className="product__delete-product-button product__element blue-text link-wo-underline"
+          onClick={(e) => {
+            e.preventDefault();
+            f({"id": productId});
+          }}>
+        Убрать
+      </a>
+    ),
 
-    OrderProducts = function (props) {
-      return <div className="order-products flex-column flex-children">
-        {props.orderProducts.map((product) => product ? (<div className="product order-products__product padded" key={product.id}>
-          <img className="product__preview product__element order-product-product-preview" />
-          <div className="product__name-link product__element">
-            <a href="#" className="blue-text">
-              {product.brand} {product.name}
-            </a>
-          </div>
-          <div className="product__cost product__element order-product-cost">{product.cost} руб.</div>
-          <Quantity onQuantityChange={props.onQuantityChange} productId={product.id} />
-          <DeleteOrderProduct f={props.onDeleteFromOrder} productId={product.id} />
-        </div>) : null)}
-      </div>;
-    },
+    OrderProducts = ({orderProducts, onQuantityChange, onDeleteFromOrder}) => (
+      <div className="order-products flex-column flex-children">
+        {
+          orderProducts.map((product) => product ?
+            (<div className="product order-products__product padded"
+                key={product.id}>
+            <img className="product__preview product__element order-product-product-preview" />
+            <div className="product__name-link product__element">
+              <a href="#" className="blue-text">
+                {product.brand} {product.name}
+              </a>
+            </div>
+            <div className="product__cost product__element order-product-cost">
+              {product.cost} руб.
+            </div>
+            <Quantity onQuantityChange={onQuantityChange}
+                productId={product.id} />
+            <DeleteOrderProduct f={onDeleteFromOrder} productId={product.id} />
+          </div>)
+          : null)
+        }
+      </div>
+    ),
 
-    TotalCost = function (props) {
+    TotalCost = function ({data}) {
       const evaluateTotalCost = function (piq, products) {
         var product,
           getProduct = function (products, id) {
@@ -60,27 +73,28 @@ const React = require("react"),
             return product;
           };
         return Object.keys(piq).reduce(
-            (costSum, productId) => {
-              //console.log(costSum, piq[productId],
-              //  getProduct(products, productId))
-              const product = getProduct(products, productId);
-              return costSum + piq[productId] * (product && product.cost || 0);
-            },
-            0
-          )
+          (costSum, productId) => (
+            costSum + piq[productId]
+              * ((getProduct(products, productId) || {}).cost || 0)
+          ),
+          0
+        );
       };
       return <div className="total-cost">
-        Итого: {evaluateTotalCost(props.data.productId_quantity, props.data.orderProducts)} руб.
+        Итого: {evaluateTotalCost(
+          data.productId_quantity,
+          data.orderProducts)
+        } руб.
       </div>;
     },
 
-    Form = function (props) {
+    Form = function ({toggleProcessingOrderStatus, handleServerResponse}) {
       const form = {},
         processResponse = function (response) {
           switch (response) {
             case 200:
-              props.toggleProcessingOrderStatus();
-              props.handleServerResponse({
+              toggleProcessingOrderStatus();
+              handleServerResponse({
                 "payload": {
                   "statusCode": 200
                 }
@@ -90,8 +104,8 @@ const React = require("react"),
               debugger;
           }
         },
-        checkout = function (props) {
-          props.toggleProcessingOrderStatus();
+        checkout = function () {
+          toggleProcessingOrderStatus();
           // проверка заполненности формы 
           let emptyInput;
           if (Object.keys(form)
@@ -105,7 +119,7 @@ const React = require("react"),
             // отправка
             setTimeout(processResponse, 1000, 200);
           } else {
-            props.toggleProcessingOrderStatus();
+            toggleProcessingOrderStatus();
             emptyInput.focus();
           }
         };
@@ -124,7 +138,7 @@ const React = require("react"),
           <textarea className="comment-ta" ref={(l) => form["comment"] = l}
             name="comment" placeholder="Комментарий" required />
           <BlueButton text="Оформить заказ" additionalClasses="checkout"
-            fobj={{f: checkout, args: props}} />
+            fobj={{f: checkout}} />
         </form>;
     },
 
@@ -162,82 +176,82 @@ const React = require("react"),
         serverResponse: false
       }
     ),
-    actions = require("../actions/order.js"),
-    mapDispatchToProps = function (dispatch) {
-      return {
-        onQuantityChange: (props) => dispatch(actions.changeQuantity(props)),
-        onDeleteFromOrder: (props) => dispatch(actions.deleteFromOrder(props)),
-        toggleProcessingOrderStatus: (props) => dispatch(actions.toggleProcessingOrderStatus(props)),
-        handleServerResponse: (props) => dispatch(actions.handleServerResponse(props))
-      };
-    },
-    mapStateToProps = function (state) {
-      return {
-        orderProducts: state.orderProducts,
-        productId_quantity: state.productId_quantity,
-        processingOrder: state.processingOrder,
-        serverResponse: state.serverResponse
-      };
-    },
-    OrderInfo = function (props) {
-     return <div className="order-info">
-            {props.text}
-        </div>;
-    },
-    Order = function (props) {
-      return <div className="order flex-column">
+    {changeQuantity, deleteFromOrder, toggleProcessingOrderStatus,
+        handleServerResponse} = require("../actions/order.js"),
+    mapDispatchToProps = (dispatch) => ({
+      onQuantityChange: (props) => dispatch(changeQuantity(props)),
+      onDeleteFromOrder: (props) => dispatch(deleteFromOrder(props)),
+      toggleProcessingOrderStatus: (props) => dispatch(toggleProcessingOrderStatus(props)),
+      handleServerResponse: (props) => dispatch(handleServerResponse(props))
+    }),
+    mapStateToProps = ({orderProducts, productId_quantity,
+        processingOrder, serverResponse}) => ({
+      orderProducts: orderProducts,
+      productId_quantity: productId_quantity,
+      processingOrder: processingOrder,
+      serverResponse: serverResponse
+    }),
+    OrderInfo = ({text}) => (
+      <div className="order-info">  
+        {text}
+      </div>
+    ),
+    Order = ({orderProducts, onQuantityChange, onDeleteFromOrder, 
+        productId_quantity, toggleProcessingOrderStatus,
+        handleServerResponse}) => (
+      <div className="order flex-column">
         <h1 className="title">Оформление заказа</h1>
         <OrderProducts
-          orderProducts={props.orderProducts}
-          onQuantityChange={props.onQuantityChange}
-          onDeleteFromOrder={props.onDeleteFromOrder}
+          orderProducts={orderProducts}
+          onQuantityChange={onQuantityChange}
+          onDeleteFromOrder={onDeleteFromOrder}
           />
         <TotalCost data={{
-          orderProducts: props.orderProducts,
-          productId_quantity: props.productId_quantity
+          orderProducts: orderProducts,
+          productId_quantity: productId_quantity
         }} />
-      <Form productId_quantity={props.productId_quantity}
-        toggleProcessingOrderStatus={props.toggleProcessingOrderStatus}
-        handleServerResponse={props.handleServerResponse} />
-      </div>;
-    },
-    OrderWrapper = function (props) {
-      const redirect = function () {
-        setTimeout(() => window.location = "cart", 6000);
-      };
-      console.log(props.processingOrder, props.serverResponse)
-      return props.orderProducts.some((l) => l !== null) ?
-        (props.processingOrder ? 
+      <Form productId_quantity={productId_quantity}
+        toggleProcessingOrderStatus={toggleProcessingOrderStatus}
+        handleServerResponse={handleServerResponse} />
+      </div>
+    ),
+    OrderWrapper = function ({processingOrder, serverResponse, orderProducts,
+        productId_quantity, onQuantityChange, onDeleteFromOrder,
+        toggleProcessingOrderStatus, handleServerResponse}) {
+      const redirect = (path) => setTimeout(() => window.location = path, 6000);
+      console.log(processingOrder, serverResponse)
+      return orderProducts.some((l) => l !== null) ?
+        (processingOrder ? 
           (<OrderInfo text="Обрабатываем заказ" />)
-            : props.serverResponse === 200 ?
+            : serverResponse === 200 ?
               // можно редирект в корзину для оформления нового заказа
               (<OrderInfo text="Заказ успешно отправлен" />)
               : (<Order
-                orderProducts={props.orderProducts}
-                productId_quantity={props.productId_quantity}
-                onQuantityChange={props.onQuantityChange}
-                onDeleteFromOrder={props.onDeleteFromOrder}
-                toggleProcessingOrderStatus={props.toggleProcessingOrderStatus}
-                handleServerResponse={props.handleServerResponse}
+                orderProducts={orderProducts}
+                productId_quantity={productId_quantity}
+                onQuantityChange={onQuantityChange}
+                onDeleteFromOrder={onDeleteFromOrder}
+                toggleProcessingOrderStatus={toggleProcessingOrderStatus}
+                handleServerResponse={handleServerResponse}
                 />)
         )
-      : (redirect(),
+      : (redirect("cart"),
         <OrderInfo
           text="В форме заказа нет товаров. Перемещаемся в корзину для составления нового заказа" />);
     },
-    ConOrder = rr.connect(
+    ConOrder = connect(
       mapStateToProps,
       mapDispatchToProps
     )(OrderWrapper);
 
-ReactDOM.render(
-  <rr.Provider store={store}>
+render(
+  <Provider store={store}>
     <ConOrder />
-  </rr.Provider>,
+  </Provider>,
   document.getElementById("main")
 );
 
-ReactDOM.render(
+render(
   <Cart.component cart={Cart.stored} />,
   document.getElementById("cart")
 );

@@ -1,8 +1,9 @@
-const deleteFromOrder = function (state, action) {
-    var productId = action.payload.id,
-        orderProducts = state && state.slice() || [];
+"use strict";
+
+const deleteFromOrder = function (state = [], {payload: {id: productId}}) {
+    const orderProducts = state.slice();
     if (typeof productId !== "string") debugger;
-    Object.keys(orderProducts).some(function (k) {
+    Object.keys(orderProducts).some((k) => {
       if (orderProducts[k] && orderProducts[k].id === productId) {
         delete orderProducts[k];
         return true;
@@ -10,19 +11,15 @@ const deleteFromOrder = function (state, action) {
     });
     return orderProducts;
   },
-  orderProducts = function (state = "silly bastards", action) {
-    return (action.type === "delete_from_order") ?
-      deleteFromOrder(state, action) : state;
-  },
-  changeQuantity = function (state, action) {
-    var id = action.payload.id,
-        quantity = action.payload.quantity,
-        newState = JSON.parse(JSON.stringify(
-          state || {}
-        ));
-    console.log(id, quantity, JSON.stringify(newState, false, 2))
+  orderProducts = (state = "silly bastards", action) => (
+    (action.type === "delete_from_order") ?
+      deleteFromOrder(state, action) : state
+  ),
+  changeQuantity = function (state = {},
+      {payload: {id: id, quantity: quantity}}) {
+    const newState = JSON.parse(JSON.stringify(state));
+    //console.log(id, quantity, JSON.stringify(newState, false, 2))
     newState[id] = quantity;
-    console.log(newState, action);
     return newState;
   },
   productId_quantity = function (state = "silly bastards", action) {

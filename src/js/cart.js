@@ -1,3 +1,5 @@
+"use strict";
+
 const React = require("react");
 
 module.exports = {
@@ -8,7 +10,7 @@ module.exports = {
         <a className="blue-text" href="#">
           {"В корзине " + productsCount + " товаров"}
         </a>
-          : "Корзина пуста"}
+        : "Корзина пуста"}
       </div>;
   },
   "stored": {
