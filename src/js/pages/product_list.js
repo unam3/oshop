@@ -160,12 +160,12 @@ const React = require("react"),
       productsCategory: productsCategory,
     }),
     {addToCart} = require("../actions/cart.js"),
-    pl_actions = require("../actions/product_list.js"),
+    {showMore, fetchProducts} = require("../actions/product_list.js"),
     mapDispatchToProps = (dispatch) => ({
       onAddToCart: (props) => dispatch(addToCart(props)),
       onShowMoreProducts: (props) => {
-        dispatch(pl_actions.showMore());
-        return dispatch(pl_actions.fetchProducts(props));
+        dispatch(showMore());
+        return dispatch(fetchProducts(props));
       }
     }),
     ConProductList = connect(
