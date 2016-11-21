@@ -15,11 +15,7 @@ module.exports = {
     },
     output: {
         path: path.join(__dirname, 'build', 'js'),
-        filename: '[name].js',
-        // не работает; не исключает генерацию сурсмапов
-        devtoolLineToLine: {
-          exclude: /css/
-        }
+        filename: '[name].js'
     },
     module: {
         loaders: [
