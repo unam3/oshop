@@ -9,11 +9,10 @@ const fs = require("fs"),
       compile_pug = () => fs.readdir(pugdir, function (e, files) {
           files.forEach(function (fname) {
             fs.open(
-              path.join(
-                compose_path(
-                  build_path,
-                  fname.split('.pug')[0]) + '.htm'
-                ),
+              compose_path(
+                build_path,
+                fname.split('.pug')[0] + '.htm'
+              ),
               'w',
               function (e, fd) {
                 if (e) {
