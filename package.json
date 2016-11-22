@@ -32,8 +32,8 @@
     "webpack": "^1.13.2"
   },
   "engines": {
-    "node": "5.2.0",
-    "npm": "3.5.2"
+    "node": "7.1.0",
+    "npm": "4.0.2"
   },
   "private": true
 }
