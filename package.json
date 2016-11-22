@@ -8,6 +8,7 @@
     "url": "https://github.com/unam3/oshop.git"
   },
   "scripts": {
+    "pug": "env NODE_DEBUG=fs node pug.js",
     "compile": "webpack -d --display-error-details"
   },
   "dependencies": {
