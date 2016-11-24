@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = {
   addToCart: ({id}) => ({
     type: "add_to_cart",
@@ -7,4 +5,4 @@ module.exports = {
       id: id
     }
   })
-}
+};

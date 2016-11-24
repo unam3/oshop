@@ -11,8 +11,9 @@ module.exports = {
         }
     },
     "env": {
+        "browser": true,
+        "node": true,
         "commonjs": true,
-        "shared-node-browser": true,
         "amd": true,
         "es6": true
     },
@@ -45,6 +46,7 @@ module.exports = {
         "no-sequences": "warn",
         //"no-unmodified-loop-condition": "warn",
         "no-unused-expressions": "warn",
+        "no-unused-vars": ["warn", {"args": "none"}],
         "no-useless-return": "warn",
         "yoda": "error",
 
@@ -54,6 +56,9 @@ module.exports = {
         "handle-callback-err": ["error", "e"],
         "array-bracket-spacing": "error",
 
-        "semi": "error"
+        "semi": "error",
+
+        "react/display-name": "off",
+        "react/prop-types": "off"
     }
 }

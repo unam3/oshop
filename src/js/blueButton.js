@@ -12,4 +12,4 @@ module.exports = function (props) {
       href="#">
         {props.text}
     </a>;
-}
+};

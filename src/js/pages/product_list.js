@@ -1,12 +1,9 @@
-"use strict";
-
 const React = require("react"),
     {render} = require("react-dom"),
     {connect, Provider} = require("react-redux"),
     Redux = require("redux"),
     products = require('../products.js'),
     BlueButton = require('../blueButton.js'),
-    applyF = require("../applyF.js"),
     Cart = require("../cart.js"),
 
     CostFilter = function () {
@@ -31,7 +28,7 @@ const React = require("react"),
       const brandsObj = {};
       products.forEach(function (product) {
         brandsObj[product.brand] = true;
-      })
+      });
       return <Filter
           additionalClasses="filters__brand-filter filters__filter"
           filterName="Бренд"
@@ -51,7 +48,7 @@ const React = require("react"),
       return <div className={className}>
           <h6 className="filter__title">{filterName}</h6>
           {filter}
-        </div>
+        </div>;
     },
 
     Filters = ({products}) => (

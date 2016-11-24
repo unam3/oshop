@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = {
   handleServerResponse: ({payload}) => ({
     type: "handle_server_response",
@@ -21,4 +19,4 @@ module.exports = {
       quantity: quantity
     }
   })
-}
+};

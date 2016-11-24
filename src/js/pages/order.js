@@ -1,9 +1,6 @@
-"use strict";
-
 const React = require("react"),
     {render} = require("react-dom"),
     {connect, Provider} = require("react-redux"),
-    products = require('../products.js'),
     BlueButton = require('../blueButton.js'),
     Cart = require("../cart.js"),
 
@@ -112,7 +109,7 @@ const React = require("react"),
               .every((inputName) => {
                 let v = form[inputName].value,
                   checkPassed = (v.length !== 0) && /\S/m.test(v);
-                console.log("cp", checkPassed)
+                console.log("cp", checkPassed);
                 if (!checkPassed)
                   emptyInput = form[inputName];
                 return checkPassed; })) {
@@ -142,8 +139,6 @@ const React = require("react"),
         </form>;
     },
 
-    productsCategory = Object.keys(products)[0],
-    productsList = products[productsCategory],
     store = require('redux').createStore(require('../reducers/order.js'),
       { 
         // product.id только хранить. тянуть с сервака все остальное
@@ -219,7 +214,7 @@ const React = require("react"),
         productId_quantity, onQuantityChange, onDeleteFromOrder,
         toggleProcessingOrderStatus, handleServerResponse}) {
       const redirect = (path) => setTimeout(() => window.location = path, 6000);
-      console.log(processingOrder, serverResponse)
+      console.log(processingOrder, serverResponse);
       return orderProducts.some((l) => l !== null) ?
         (processingOrder ? 
           (<OrderInfo text="Обрабатываем заказ" />)

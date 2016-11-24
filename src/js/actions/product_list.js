@@ -1,5 +1,3 @@
-"use strict";
-
 module.exports = {
   showMore: function (action) {
     return {
@@ -102,4 +100,4 @@ module.exports = {
       return getState();
     };
   }
-}
+};

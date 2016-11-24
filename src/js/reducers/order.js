@@ -1,5 +1,3 @@
-"use strict";
-
 const deleteFromOrder = function (state = [], {payload: {id: productId}}) {
     const orderProducts = state.slice();
     if (typeof productId !== "string") debugger;
@@ -33,7 +31,7 @@ const deleteFromOrder = function (state = [], {payload: {id: productId}}) {
   processingOrder = function (state = false, action) {
     switch (action.type) {
       case "toggle_processing_status":
-        console.log("processingOrder", state, action)
+        console.log("processingOrder", state, action);
         return !state;
       default:
         return state;

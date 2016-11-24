@@ -1,5 +1,3 @@
-"use strict";
-
 const cart = require("../reducers/cart.js"),
     showMore = function (state, action) {
       return state + 6;
