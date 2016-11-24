@@ -22,10 +22,10 @@ module.exports = {
           {
             test: /\.js$/,
             exclude: /node_modules/,
-            loader: 'babel-loader',
-            query: {
-              presets: ['react', 'es2015']
-            }
+            loaders: [
+              'babel-loader?{presets: ["react", "es2015"]}',
+              'eslint-loader'
+            ],
           },
           //https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md
           {
