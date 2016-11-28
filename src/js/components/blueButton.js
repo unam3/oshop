@@ -1,5 +1,5 @@
 const React = require("react"),
-      applyF = require("./applyF");
+      applyF = require("../helpers/applyF.js");
 
 module.exports = function (props) {
   let className = "button-blue";

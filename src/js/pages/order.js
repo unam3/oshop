@@ -1,8 +1,8 @@
 const React = require("react"),
     {render} = require("react-dom"),
     {connect, Provider} = require("react-redux"),
-    BlueButton = require('../blueButton.js'),
-    Cart = require("../cart.js"),
+    BlueButton = require('../components/blueButton.js'),
+    Cart = require("../components/cart.js"),
 
     Quantity = ({onQuantityChange, productId}) => (
       <div className="product__element">

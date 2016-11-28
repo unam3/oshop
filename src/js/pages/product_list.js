@@ -3,8 +3,8 @@ const React = require("react"),
     {connect, Provider} = require("react-redux"),
     Redux = require("redux"),
     products = require('../products.js'),
-    BlueButton = require('../blueButton.js'),
-    Cart = require("../cart.js"),
+    BlueButton = require('../components/blueButton.js'),
+    Cart = require("../components/cart.js"),
 
     CostFilter = function () {
       // можно с reduce пройти в начале по всем элементам, найти min/max и
