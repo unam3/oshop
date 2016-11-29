@@ -57,159 +57,6 @@ table {
 	border-spacing: 0;
 }
 
-/* ring */
-@-webkit-keyframes uil-ring-anim {
-  0% {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-webkit-keyframes uil-ring-anim {
-  0% {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-moz-keyframes uil-ring-anim {
-  0% {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-ms-keyframes uil-ring-anim {
-  0% {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-moz-keyframes uil-ring-anim {
-  0% {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-webkit-keyframes uil-ring-anim {
-  0% {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-o-keyframes uil-ring-anim {
-  0% {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@keyframes uil-ring-anim {
-  0% {
-    -ms-transform: rotate(0deg);
-    -moz-transform: rotate(0deg);
-    -webkit-transform: rotate(0deg);
-    -o-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -ms-transform: rotate(360deg);
-    -moz-transform: rotate(360deg);
-    -webkit-transform: rotate(360deg);
-    -o-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-.uil-ring-css {
-  background: none;
-  position: relative;
-  margin: auto;
-  width: 200px;
-  height: 200px;
-  transform:scale(0.6);
-}
-.uil-ring-css > div {
-  position: absolute;
-  display: block;
-  width: 160px;
-  height: 160px;
-  top: 20px;
-  left: 20px;
-  border-radius: 80px;
-  box-shadow: 0 6px 0 0 #0000ff;
-  -ms-animation: uil-ring-anim 1s linear infinite;
-  -moz-animation: uil-ring-anim 1s linear infinite;
-  -webkit-animation: uil-ring-anim 1s linear infinite;
-  -o-animation: uil-ring-anim 1s linear infinite;
-  animation: uil-ring-anim 1s linear infinite;
-}
-
 /* убираем управляющие элементы */
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -217,14 +64,13 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
 }
 
-
-/**/
+/* основная часть */
 
 * {
     box-sizing: border-box;
 }
 
-.flex-grid, .order-products {
+.flex-grid {
     display: flex;
 }
 
@@ -233,76 +79,18 @@ input[type=number]::-webkit-outer-spin-button {
     flex-direction: row;
 }
 
-.product-list__filters, .product-list_product-table, .order-products__product {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    border-width: 1px;
-}
-
-.product-list_product-table {
-  /*
-  margin-left: 1.3em;
-  */
-  border: 0;
-}
-
-.product-list__filters {
-  min-width: 280px;
-  max-width: 280px;
-  /*
-  width: 280px;
-  */
-  padding: 0 1em;
-  margin-bottom: auto;
-}
-
-.filters__filter {
-  margin-top: 1.5em;
-}
-
-.cost-filter__part {
-    margin: auto;
-}
-
-.cost-filter__input {
-  width: 5em;
-  margin-left: 0;
-  margin-right: 0;
-}
-
 .flex-column {
     display: flex;
     flex-direction: column;
 }
 
-.filter__brands {
-  flex-wrap: wrap;
+#main {
+  margin: 44px 0 0 0;
 }
 
-.brand {
-  width: 124px;
-  margin-top: 0.5em;
-}
-
-.filter__title {
-  margin: 0.5em 0;
-  font-size: 1em;
-}
-
-.brand-filter {
-    display: flex;
-    flex: row;
-}
-
-.filters__controls {
-  flex-wrap: wrap;
-  margin: 1.5em 0;
-}
-
-.control__wrapper {
-  width: 124px;
-  margin: auto;
+.title {
+  margin-bottom: 30px; 
+  font-size: 2.5em;
 }
 
 nav, .copyright {
@@ -315,10 +103,6 @@ nav, .copyright {
   margin-left: 0;
 }
 
-.padded {
-    padding: 0.6em;
-}
-
 .nav__link {
     padding: 1.2em 1.2em 0 1.2em;
 }
@@ -328,111 +112,21 @@ nav, .copyright {
     height: 60px;
 }
 
-.cart {
-    width: 250px;
-    display: block;
-    margin: 0 0 0 auto;
-    padding: 23px 50px;
-    border-width: 1px;
-    text-align: center;
-    font-size: 0.9em;
-}
-
-#main {
-  margin: 44px 0 0 0;
-}
-
 footer {
   padding-top: 1em;
   padding-bottom: 1em;
   border-top-width: 1px;
 }
 
-.order-form {
-  width: 565px;
-}
-
-/* products_list */
-.title {
-  margin-bottom: 30px; 
-  font-size: 2.5em;
-}
-
-.button-blue {
-  text-decoration: none;
-  background-color: #0000ff;
-  color: #ffffff;
-}
-.order-products {
-  /*
-  margin: 0.4em 0;
-  */
-}
-
-.order-products__product {
-  /*
-  margin: 0.4em 0;
-  */
-}
+/* order && product_list */
 
 .product {
   margin: 0.3em 0;
   max-width: 720px;
 }
-.product__element {
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.product__name-link {
-  /*
-  min-width: 315px;
-  */
-  min-width: 285px;
-}
-
-.order-product-cost {
-  min-width: 7em;
-}
 
 .product__cost {
   font-size: 1.4em;
-}
-
-.quantity {
-  max-width: 3em;
-  text-align: center;
-}
-
-.product__delete-product-button {
-  margin: auto;
-  border-bottom: 1px dashed;
-}
-
-.total-cost {
-  margin: 1.4em 0;
-  font-size: 1.4em;
-}
-
-.order-form > * {
-  margin: 0 0 0.8em 0;
-}
-
-.comment-ta {
-  height: 7em;
-  margin: 1em 0 0 0;
-}
-
-.checkout {
-  font-size: 1.05em;
-  margin: 36px auto 36px 0;
-  padding: 12px 33px;
-}
-
-.order-product-product-preview {
-  margin-right: 1.7em;
-  width: 80px;
-  height: 80px;
 }
 
 .blue-text {
@@ -441,77 +135,4 @@ footer {
 
 .link-wo-underline {
   text-decoration: none;
-}
-
-/* product_list */
-.products-table__table {
-  flex-wrap: wrap;
-  width: 720px;
-}
-
-.products-table__title {
-  /*
-  (/ 0.8 (/ 2.5 1.3))
-  0.41599998  
-  руками до 0.45 подгоняем
-  работает везде по-разному при масштабировании
-  */
-  margin: 0 0 0.55em 0.55em;
-}
-
-.product-list__product {
-  width: 220px;
-  height: 250px;
-  border-width: 1px;
-  margin: 0 0 1.3em 1.3em;
-}
-
-.product-list__product-preview {
-  width: 200px;
-  height: 170px;
-  margin: auto;
-}
-
-.product-list__product_margin {
-  margin: 0 0.75em;
-}
-
-.product-list-cost {
-  margin: auto;
-  margin-left: 0;
-}
-
-.add-to-cart, .product-in-cart {
-  /*
-  width: 85px;
-  height: 27px;
-  */
-  margin: 0.7em;
-  padding: 8px 13px;
-}
-
-.product-in-cart {
-  background-color: #a0a0a0;
-  color: #ffffff;
-}
-
-.products_filter {}
-.products_filter_type {}
-.products_list {}
-
-.show-more {
-  margin: 1.7em auto;
-  padding: 13px 51px;
-  text-decoration: none;
-  border-width: 1px;
-}
-
-.order-info {
-  margin: 5em auto;
-  text-align: center;
-  font-size: 2em;
-}
-
-.order-form__requirement {
-  text-decoration: underline;
 }

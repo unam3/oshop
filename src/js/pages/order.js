@@ -31,7 +31,7 @@ const React = require("react"),
     ),
 
     OrderProducts = ({orderProducts, onQuantityChange, onDeleteFromOrder}) => (
-      <div className="order-products flex-column flex-children">
+      <div className="flex-grid flex-column flex-children">
         {
           orderProducts.map((product) => product ?
             (<div className="product order-products__product padded"

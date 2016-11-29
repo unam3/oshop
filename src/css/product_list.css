@@ -1,0 +1,129 @@
+.product-list__filters, .product-list_product-table {
+    width: 100%;
+    border-width: 1px;
+}
+
+.product-list_product-table {
+  /*
+  margin-left: 1.3em;
+  */
+  border: 0;
+}
+
+.product-list__filters {
+  min-width: 280px;
+  max-width: 280px;
+  /*
+  width: 280px;
+  */
+  padding: 0 1em;
+  margin-bottom: auto;
+}
+
+.filters__filter {
+  margin-top: 1.5em;
+}
+
+.cost-filter__part {
+    margin: auto;
+}
+
+.cost-filter__input {
+  width: 5em;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.filter__brands {
+  flex-wrap: wrap;
+}
+
+.brand {
+  width: 124px;
+  margin-top: 0.5em;
+}
+
+.filter__title {
+  margin: 0.5em 0;
+  font-size: 1em;
+}
+
+.brand-filter {
+    display: flex;
+    flex: row;
+}
+
+.filters__controls {
+  flex-wrap: wrap;
+  margin: 1.5em 0;
+}
+
+.control__wrapper {
+  width: 124px;
+  margin: auto;
+}
+
+.products-table__table {
+  flex-wrap: wrap;
+  width: 720px;
+}
+
+.products-table__title {
+  /*
+  (/ 0.8 (/ 2.5 1.3))
+  0.41599998  
+  руками до 0.45 подгоняем
+  работает везде по-разному при масштабировании
+  */
+  margin: 0 0 0.55em 0.55em;
+}
+
+.product-list__product {
+  width: 220px;
+  height: 250px;
+  border-width: 1px;
+  margin: 0 0 1.3em 1.3em;
+}
+
+.product-list__product-preview {
+  width: 200px;
+  height: 170px;
+  margin: auto;
+}
+
+.product-list__product_margin {
+  margin: 0 0.75em;
+}
+
+.product-list-cost {
+  margin: auto;
+  margin-left: 0;
+}
+
+.add-to-cart, .product-in-cart {
+  /*
+  width: 85px;
+  height: 27px;
+  */
+  margin: 0.7em;
+  padding: 8px 13px;
+}
+
+.product-in-cart {
+  background-color: #a0a0a0;
+  color: #ffffff;
+}
+
+/*
+.products_filter {}
+.products_filter_type {}
+.products_list {}
+*/
+
+.show-more {
+  margin: 1.7em auto;
+  padding: 13px 51px;
+  text-decoration: none;
+  border-width: 1px;
+}
+
