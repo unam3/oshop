@@ -1,7 +1,7 @@
 const React = require("react");
 
 module.exports = {
-  "component": function ({cart}) {
+  component ({cart}) {
     const productsCount = Object.keys(cart).length;
     return <div className="cart blue-text">
       {productsCount ?

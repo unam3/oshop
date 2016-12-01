@@ -88,7 +88,10 @@ const React = require("react"),
               </div>
               : <BlueButton
                 additionalClasses="add-to-cart" text="В корзину"
-                fobj={{f: onAddToCart, args: {id: id}}}
+                fobj={{
+                  f: onAddToCart,
+                  args: {id}
+                }}
                 />
           }
         </div>
@@ -151,10 +154,10 @@ const React = require("react"),
       Redux.applyMiddleware(require("redux-thunk").default)
     ),
     mapStateToProps = ({cart, products, productsLoadOffset}) => ({
-      cart: cart,
-      products: products,
-      productsLoadOffset: productsLoadOffset,
-      productsCategory: productsCategory,
+      cart,
+      products,
+      productsLoadOffset,
+      productsCategory
     }),
     {addToCart} = require("../actions/cart.js"),
     pl_actions = require("../actions/product_list.js"),
@@ -170,7 +173,7 @@ const React = require("react"),
       mapDispatchToProps
     )(ProductList),
     ConCart = connect(
-      ({cart}) => ({cart: cart})
+      ({cart}) => ({cart})
     )(Cart.component);
 
 render(

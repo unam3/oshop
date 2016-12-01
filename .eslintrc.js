@@ -60,6 +60,7 @@ module.exports = {
         "no-const-assign": "error",
         "no-var": "error",
         "prefer-const": "error",
+        "object-shorthand": ["error", "always"],
 
         "semi": "error",
 

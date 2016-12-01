@@ -1,15 +1,15 @@
 module.exports = {
-  showMore: function (action) {
+  showMore (action) {
     return {
       type: "show_more",
     };
   },
-  requestProducts: function (dispatch, getState) {
+  requestProducts (dispatch, getState) {
     return {
       type: "request_products"
     };
   },
-  receiveProducts: function (dispatch, state) {
+  receiveProducts (dispatch, state) {
     const products = [
             {
               "id": "1f3",
@@ -93,7 +93,7 @@ module.exports = {
       }
     };
   },
-  fetchProducts: function (action) {
+  fetchProducts (action) {
     return (dispatch, getState) => {
       dispatch(this.requestProducts(dispatch, getState));
       setTimeout(() => dispatch(this.receiveProducts(dispatch, getState)), 2100);

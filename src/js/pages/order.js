@@ -181,10 +181,10 @@ const React = require("react"),
     }),
     mapStateToProps = ({orderProducts, productId_quantity,
         processingOrder, serverResponse}) => ({
-      orderProducts: orderProducts,
-      productId_quantity: productId_quantity,
-      processingOrder: processingOrder,
-      serverResponse: serverResponse
+      orderProducts,
+      productId_quantity,
+      processingOrder,
+      serverResponse
     }),
     OrderInfo = ({text}) => (
       <div className="order-info">  
@@ -202,8 +202,8 @@ const React = require("react"),
           onDeleteFromOrder={onDeleteFromOrder}
           />
         <TotalCost data={{
-          orderProducts: orderProducts,
-          productId_quantity: productId_quantity
+          orderProducts,
+          productId_quantity
         }} />
       <Form productId_quantity={productId_quantity}
         toggleProcessingOrderStatus={toggleProcessingOrderStatus}
