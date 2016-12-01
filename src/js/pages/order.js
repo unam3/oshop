@@ -55,28 +55,28 @@ const React = require("react"),
     ),
 
     TotalCost = function ({data}) {
-      const evaluateTotalCost = function (piq, products) {
-        var product,
-          getProduct = function (products, id) {
-            if (!products.length)
-              throw "shi~~";
-            products.some((p) => {
-              product = false;
-              if (p && p.id === id) {
-                product = p;
-                return true;
-              }
-            });
-            return product;
-          };
-        return Object.keys(piq).reduce(
-          (costSum, productId) => (
-            costSum + piq[productId]
-              * ((getProduct(products, productId) || {}).cost || 0)
-          ),
-          0
-        );
-      };
+      const getProduct = function (products, id) {
+              if (!products.length)
+                throw "shi~~";
+              let product;
+              products.some((p) => {
+                product = false;
+                if (p && p.id === id) {
+                  product = p;
+                  return true;
+                }
+              });
+              return product;
+            },
+            evaluateTotalCost = function (piq, products) {
+              return Object.keys(piq).reduce(
+                (costSum, productId) => (
+                  costSum + piq[productId]
+                    * ((getProduct(products, productId) || {}).cost || 0)
+                ),
+                0
+              );
+            };
       return <div className="total-cost">
         Итого: {evaluateTotalCost(
           data.productId_quantity,
@@ -107,8 +107,8 @@ const React = require("react"),
           let emptyInput;
           if (Object.keys(form)
               .every((inputName) => {
-                let v = form[inputName].value,
-                  checkPassed = (v.length !== 0) && /\S/m.test(v);
+                const v = form[inputName].value,
+                      checkPassed = (v.length !== 0) && /\S/m.test(v);
                 console.log("cp", checkPassed);
                 if (!checkPassed)
                   emptyInput = form[inputName];

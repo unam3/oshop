@@ -56,6 +56,11 @@ module.exports = {
         "handle-callback-err": ["error", "e"],
         "array-bracket-spacing": "error",
 
+        //http://eslint.org/docs/rules/#ecmascript-6
+        "no-const-assign": "error",
+        "no-var": "error",
+        "prefer-const": "error",
+
         "semi": "error",
 
         "react/display-name": "off",
