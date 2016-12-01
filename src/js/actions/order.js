@@ -1,7 +1,7 @@
 module.exports = {
   handleServerResponse: ({payload}) => ({
+    payload,
     type: "handle_server_response",
-    payload
   }),
   toggleProcessingOrderStatus: (action) => ({
     type: "toggle_processing_status"
