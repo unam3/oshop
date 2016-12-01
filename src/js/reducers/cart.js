@@ -1,5 +1,7 @@
 const addToCart = function (state, action) {
-  return state && Object.assign({}, state, {[action.payload.id]: true}) || {};
+  return state ?
+    Object.assign({}, state, {[action.payload.id]: true})
+    : {};
 };
 
 module.exports = function (state = "silly bastards", action) {
