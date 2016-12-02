@@ -12,7 +12,7 @@ const React = require("react"),
             e.preventDefault();
             onQuantityChange({
               id: productId,
-              quantity: parseInt(e.target.value)
+              quantity: parseInt(e.target.value, 10)
             });
           }}
           type="number" min="1" defaultValue="1" />

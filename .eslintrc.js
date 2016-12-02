@@ -67,6 +67,7 @@ module.exports = {
         "object-shorthand": ["error", "always"],
 
         "semi": "error",
+        "radix": "error",
 
         "react/display-name": "off",
         "react/prop-types": "off"
