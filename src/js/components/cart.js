@@ -3,14 +3,16 @@ const React = require("react");
 module.exports = {
   component ({cart}) {
     const productsCount = Object.keys(cart).length;
+
     return <div className="cart blue-text">
-      {productsCount ?
-        <a className="blue-text" href="#">
-          {"В корзине " + productsCount + " товаров"}
-        </a>
-        : "Корзина пуста"}
+      { productsCount ? (
+          <a className="blue-text" href="#">
+            {"В корзине " + productsCount + " товаров"}
+          </a>) : "Корзина пуста"
+      }
       </div>;
   },
+
   // для эмуляции десяти позиций в корзине
   "stored": {
     "b3d": true,

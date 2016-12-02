@@ -21,11 +21,13 @@ const React = require("react"),
     ),
 
     DeleteOrderProduct = ({f, productId}) => (
-      <a href="#" className="product__delete-product-button product__element blue-text link-wo-underline"
-          onClick={(e) => {
-            e.preventDefault();
-            f({"id": productId});
-          }}>
+      <a className="product__delete-product-button product__element blue-text link-wo-underline"
+        onClick={(e) => {
+          e.preventDefault();
+
+          f({"id": productId});
+        }}
+        href="#" >
         Убрать
       </a>
     ),
@@ -48,8 +50,7 @@ const React = require("react"),
             <Quantity onQuantityChange={onQuantityChange}
                 productId={product.id} />
             <DeleteOrderProduct f={onDeleteFromOrder} productId={product.id} />
-          </div>)
-          : null)
+          </div>) : null)
         }
       </div>
     ),
@@ -58,16 +59,22 @@ const React = require("react"),
       const getProduct = function (products, id) {
               if (!products.length)
                 throw "shi~~";
+
               let product;
+
               products.some((p) => {
                 product = false;
+
                 if (p && p.id === id) {
                   product = p;
+
                   return true;
                 }
               });
+
               return product;
             },
+
             evaluateTotalCost = function (piq, products) {
               return Object.keys(piq).reduce(
                 (costSum, productId) => (
@@ -77,6 +84,7 @@ const React = require("react"),
                 0
               );
             };
+
       return <div className="total-cost">
         Итого: {evaluateTotalCost(
           data.productId_quantity,
@@ -87,39 +95,52 @@ const React = require("react"),
 
     Form = function ({toggleProcessingOrderStatus, handleServerResponse}) {
       const form = {},
-        processResponse = function (response) {
-          switch (response) {
-            case 200:
+
+            processResponse = function (response) {
+              switch (response) {
+                case 200:
+                  toggleProcessingOrderStatus();
+
+                  handleServerResponse({
+                    "payload": {
+                      "statusCode": 200
+                    }
+                  });
+
+                  break;
+                default:
+                  debugger;
+              }
+            },
+
+            checkout = function () {
               toggleProcessingOrderStatus();
-              handleServerResponse({
-                "payload": {
-                  "statusCode": 200
-                }
-              });
-              break;
-            default:
-              debugger;
-          }
-        },
-        checkout = function () {
-          toggleProcessingOrderStatus();
-          // проверка заполненности формы 
-          let emptyInput;
-          if (Object.keys(form)
-              .every((inputName) => {
-                const v = form[inputName].value,
-                      checkPassed = (v.length !== 0) && /\S/m.test(v);
-                console.log("cp", checkPassed);
-                if (!checkPassed)
-                  emptyInput = form[inputName];
-                return checkPassed; })) {
-            // отправка
-            setTimeout(processResponse, 1000, 200);
-          } else {
-            toggleProcessingOrderStatus();
-            emptyInput.focus();
-          }
-        };
+
+              // проверка заполненности формы 
+              let emptyInput;
+
+              if (Object.keys(form)
+                  .every((inputName) => {
+                    const v = form[inputName].value,
+
+                          checkPassed = (v.length !== 0) && /\S/m.test(v);
+
+                    console.log("cp", checkPassed);
+
+                    if (!checkPassed)
+                      emptyInput = form[inputName];
+
+                    return checkPassed;
+              })) {
+                // эмуляция отправки и обработки ответа
+                setTimeout(processResponse, 1000, 200);
+              } else {
+                toggleProcessingOrderStatus();
+
+                emptyInput.focus();
+              }
+            };
+
       return <form className="order-form flex-column">
           <div className="order-form__requirement">
             Поля ниже необходимо заполнить:
@@ -171,29 +192,50 @@ const React = require("react"),
         serverResponse: false
       }
     ),
-    {changeQuantity, deleteFromOrder, toggleProcessingOrderStatus,
-        handleServerResponse} = require("../actions/order.js"),
+
+    {
+      changeQuantity,
+      deleteFromOrder,
+      toggleProcessingOrderStatus,
+      handleServerResponse
+    } = require("../actions/order.js"),
+
     mapDispatchToProps = (dispatch) => ({
       onQuantityChange: (props) => dispatch(changeQuantity(props)),
+
       onDeleteFromOrder: (props) => dispatch(deleteFromOrder(props)),
+
       toggleProcessingOrderStatus: (props) => dispatch(toggleProcessingOrderStatus(props)),
+
       handleServerResponse: (props) => dispatch(handleServerResponse(props))
     }),
-    mapStateToProps = ({orderProducts, productId_quantity,
-        processingOrder, serverResponse}) => ({
+
+    mapStateToProps = ({
+      orderProducts,
+      productId_quantity,
+      processingOrder,
+      serverResponse
+    }) => ({
       orderProducts,
       productId_quantity,
       processingOrder,
       serverResponse
     }),
+
     OrderInfo = ({text}) => (
       <div className="order-info">  
         {text}
       </div>
     ),
-    Order = ({orderProducts, onQuantityChange, onDeleteFromOrder, 
-        productId_quantity, toggleProcessingOrderStatus,
-        handleServerResponse}) => (
+
+    Order = ({
+      orderProducts,
+      onQuantityChange,
+      onDeleteFromOrder, 
+      productId_quantity,
+      toggleProcessingOrderStatus,
+      handleServerResponse
+    }) => (
       <div className="order flex-column">
         <h1 className="title">Оформление заказа</h1>
         <OrderProducts
@@ -210,11 +252,24 @@ const React = require("react"),
         handleServerResponse={handleServerResponse} />
       </div>
     ),
-    OrderWrapper = function ({processingOrder, serverResponse, orderProducts,
-        productId_quantity, onQuantityChange, onDeleteFromOrder,
-        toggleProcessingOrderStatus, handleServerResponse}) {
-      const redirect = (path) => setTimeout(() => window.location = path, 6000);
+
+    OrderWrapper = function ({
+      processingOrder,
+      serverResponse,
+      orderProducts,
+      productId_quantity,
+      onQuantityChange,
+      onDeleteFromOrder,
+      toggleProcessingOrderStatus,
+      handleServerResponse
+    }) {
+      const redirect = path => setTimeout(
+        () => window.location = path,
+        6000
+      );
+
       console.log(processingOrder, serverResponse);
+      
       return orderProducts.some((l) => l !== null) ?
         (processingOrder ? 
           (<OrderInfo text="Обрабатываем заказ" />)
@@ -222,18 +277,19 @@ const React = require("react"),
               // можно редирект в корзину для оформления нового заказа
               (<OrderInfo text="Заказ успешно отправлен" />)
               : (<Order
-                orderProducts={orderProducts}
-                productId_quantity={productId_quantity}
-                onQuantityChange={onQuantityChange}
-                onDeleteFromOrder={onDeleteFromOrder}
-                toggleProcessingOrderStatus={toggleProcessingOrderStatus}
-                handleServerResponse={handleServerResponse}
-                />)
+                  orderProducts={orderProducts}
+                  productId_quantity={productId_quantity}
+                  onQuantityChange={onQuantityChange}
+                  onDeleteFromOrder={onDeleteFromOrder}
+                  toggleProcessingOrderStatus={toggleProcessingOrderStatus}
+                  handleServerResponse={handleServerResponse}
+                  />)
         )
       : (redirect("cart"),
         <OrderInfo
           text="В форме заказа нет товаров. Перемещаемся в корзину для составления нового заказа" />);
     },
+
     ConOrder = connect(
       mapStateToProps,
       mapDispatchToProps
@@ -243,10 +299,12 @@ render(
   <Provider store={store}>
     <ConOrder />
   </Provider>,
+
   document.getElementById("main")
 );
 
 render(
   <Cart.component cart={Cart.stored} />,
+
   document.getElementById("cart")
 );

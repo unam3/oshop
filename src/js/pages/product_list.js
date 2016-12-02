@@ -18,6 +18,7 @@ const React = require("react"),
           <input className="cost-filter__part cost-filter__input"
             type="number" defaultValue="1000000" />
         </div>;
+
       return <Filter
         additionalClasses="filters__cost-filter filters__filter"
         filterName="Цена"
@@ -26,9 +27,11 @@ const React = require("react"),
 
     BrandFilter = function ({products}) {
       const brandsObj = {};
+
       products.forEach(function (product) {
         brandsObj[product.brand] = true;
       });
+
       return <Filter
           additionalClasses="filters__brand-filter filters__filter"
           filterName="Бренд"
@@ -43,8 +46,10 @@ const React = require("react"),
 
     Filter = function ({additionalClasses, filterName, filter}) {
       let className = "filter";
+
       if (additionalClasses)
         className += " " + additionalClasses;
+
       return <div className={className}>
           <h6 className="filter__title">{filterName}</h6>
           {filter}
@@ -81,18 +86,17 @@ const React = require("react"),
         </div>
         <div className="product-list__product_margin flex-row">
           <div className="product__cost product-list-cost">{cost} руб.</div>
-          {
-            cart[id] ?
-              <div className="product-in-cart">
-                В корзине
-              </div>
-              : <BlueButton
-                additionalClasses="add-to-cart" text="В корзину"
-                fobj={{
-                  f: onAddToCart,
-                  args: {id}
-                }}
-                />
+          { cart[id] ?
+            <div className="product-in-cart">
+              В корзине
+            </div>
+            : <BlueButton
+              additionalClasses="add-to-cart" text="В корзину"
+              fobj={{
+                f: onAddToCart,
+                args: {id}
+              }}
+              />
           }
         </div>
       </div>
@@ -111,8 +115,14 @@ const React = require("react"),
       </div>
     ),
 
-    ProductTable = ({productsCategory, products, productsLoadOffset,
-        cart, onAddToCart, onShowMoreProducts}) => (
+    ProductTable = ({
+      productsCategory,
+      products,
+      productsLoadOffset,
+      cart,
+      onAddToCart,
+      onShowMoreProducts
+    }) => (
       <div className="products-table product-list_product-table flex-column">
         <h1 className="products-table__title title">
           {productsCategory}
@@ -127,12 +137,20 @@ const React = require("react"),
         <ShowMoreProducts onShowMoreProducts={onShowMoreProducts} />
       </div>
     ),
-    ProductList = function ({products, productsLoadOffset, onShowMoreProducts,
-        cart, onAddToCart}) {
+
+    ProductList = function ({
+      products,
+      productsLoadOffset,
+      onShowMoreProducts,
+      cart,
+      onAddToCart
+    }) {
+
       // ~ componentDidMount
       if (products.length === 0 && productsLoadOffset === 0) {
         onShowMoreProducts();
       }
+
       return products.length ? (
         <div className="product-list main__product-list flex-row">
           <Filters products={products} />
@@ -144,8 +162,11 @@ const React = require("react"),
             />
         </div>) : (<Ring />);
     },
+
     productsCategory = Object.keys(products)[0],
-    store = Redux.createStore(require('../reducers/product_list.js'),
+
+    store = Redux.createStore(
+      require('../reducers/product_list.js'),
       {
         cart: Cart.stored,
         products: [],
@@ -153,25 +174,33 @@ const React = require("react"),
       },
       Redux.applyMiddleware(require("redux-thunk").default)
     ),
+
     mapStateToProps = ({cart, products, productsLoadOffset}) => ({
       cart,
       products,
       productsLoadOffset,
       productsCategory
     }),
+
     {addToCart} = require("../actions/cart.js"),
+
     pl_actions = require("../actions/product_list.js"),
+
     mapDispatchToProps = (dispatch) => ({
       onAddToCart: (props) => dispatch(addToCart(props)),
+
       onShowMoreProducts: (props) => {
         dispatch(pl_actions.showMore());
+
         return dispatch(pl_actions.fetchProducts(props));
       }
     }),
+
     ConProductList = connect(
       mapStateToProps,
       mapDispatchToProps
     )(ProductList),
+
     ConCart = connect(
       ({cart}) => ({cart})
     )(Cart.component);
@@ -180,6 +209,7 @@ render(
   <Provider store={store}>
     <ConProductList />
   </Provider>,
+
   document.getElementById("main")
 );
 
@@ -187,5 +217,6 @@ render(
   <Provider store={store}>
     <ConCart />
   </Provider>,
+
   document.getElementById("cart")
 );

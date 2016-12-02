@@ -53,8 +53,12 @@ module.exports = {
         // http://eslint.org/docs/rules/strict
         "strict": ["error", "global"],
 
+        // http://eslint.org/docs/rules/#nodejs-and-commonjs
         "handle-callback-err": ["error", "e"],
         "array-bracket-spacing": "error",
+
+        //http://eslint.org/docs/rules/#stylistic-issues
+        //"quote-props": ["error", "as-needed"],
 
         //http://eslint.org/docs/rules/#ecmascript-6
         "no-const-assign": "error",

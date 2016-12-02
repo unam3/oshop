@@ -4,11 +4,13 @@ module.exports = {
       type: "show_more",
     };
   },
+
   requestProducts (dispatch, getState) {
     return {
       type: "request_products"
     };
   },
+
   receiveProducts (dispatch, state) {
     const products = [
             {
@@ -84,6 +86,7 @@ module.exports = {
               "brand": "Salomon"
             }
           ],
+
           offsetEnd = state().productsLoadOffset;
 
     return {
@@ -93,10 +96,16 @@ module.exports = {
       }
     };
   },
+
   fetchProducts (action) {
     return (dispatch, getState) => {
       dispatch(this.requestProducts(dispatch, getState));
-      setTimeout(() => dispatch(this.receiveProducts(dispatch, getState)), 2100);
+
+      setTimeout(
+        () => dispatch(this.receiveProducts(dispatch, getState)),
+        2100
+      );
+
       return getState();
     };
   }
