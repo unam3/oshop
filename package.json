@@ -9,7 +9,7 @@
   },
   "scripts": {
     "pug": "env NODE_DEBUG=fs node pug.js",
-    "compile": "webpack -d --display-error-details"
+    "js": "webpack -d --display-error-details"
   },
   "dependencies": {
     "react": "^15.3.2",

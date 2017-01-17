@@ -41,7 +41,7 @@ npm run pug
 
   Сборка js:
 ```
-npm run compile
+npm run js
 ```
 
   В браузере запустить страницы из `build/html/`
