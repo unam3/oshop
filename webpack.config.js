@@ -8,10 +8,14 @@ module.exports = {
         // собирать отдельно в html
         //order_pug: "pug-loader!./pug/pages/order.pug",
         //product_list_pug: "pug-loader!./pug/pages/product_list.pug",
-        product_list: "./js/pages/product_list.js",
-        order: "./js/pages/order.js",
+        //
+        //product_list: "./js/pages/product_list.js",
+        //order: "./js/pages/order.js",
+        // oshop_i
+        //product_list: "./js/pages/product_list.js",
+        order: "./containers/Order/Order.js",
         // копирование css в build
-        resourses: "./resources.js"
+        //resourses: "./resources.js"
     },
     output: {
         path: path.join(__dirname, 'build', 'js'),

@@ -1,0 +1,9 @@
+.cart {
+    width: 250px;
+    display: block;
+    margin: 0 0 0 auto;
+    padding: 23px 50px;
+    border-width: 1px;
+    text-align: center;
+    font-size: 0.9em;
+}

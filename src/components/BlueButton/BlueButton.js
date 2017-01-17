@@ -1,11 +1,14 @@
-const React = require("react"),
-      applyF = require("../helpers/applyF.js");
+import React from 'react';
+import applyF from '../../helpers/applyF.js';
 
 module.exports = function (props) {
-  let className = "button-blue";
+  require('./BlueButton.css');
 
-  if (props.additionalClasses)
-    className += " " + props.additionalClasses;
+  let className = 'button-blue';
+
+  if (props.additionalClasses) {
+    className += ' ' + props.additionalClasses;
+  }
 
   return (
     <a className={className}
