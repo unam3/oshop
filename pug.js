@@ -11,27 +11,30 @@ const fs = require("fs"),
           console.log(error);
         } else {
           files.forEach(function (fname) {
-            fs.open(
-              compose_path(
-                build_path,
-                fname.split('.pug')[0] + '.htm'
-              ),
-              'w',
-              function (error, fd) {
-                if (error) {
-                  console.log(error);
-                } else {
-                  fs.write(
-                    fd,
-                    pug.compileFile(compose_path(pugdir, fname), {
-                      //"debug": true,
-                      "pretty": true,
-                    })(),
-                    (error) => (error !== null) && console.log(error)
-                  );
+            if (fname.length > 4
+              && fname.indexOf('.pug', fname.length - 4) !== -1) {
+              fs.open(
+                compose_path(
+                  build_path,
+                  fname.split('.pug')[0] + '.htm'
+                ),
+                'w',
+                function (error, fd) {
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    fs.write(
+                      fd,
+                      pug.compileFile(compose_path(pugdir, fname), {
+                        //"debug": true,
+                        "pretty": true,
+                      })(),
+                      (error) => (error !== null) && console.log(error)
+                    );
+                  }
                 }
-              }
-            );
+              );
+            }
           });
         }
       }),
