@@ -1,10 +1,10 @@
-"use strict";
+'use strict';
 
-const fs = require("fs"),
+const fs = require('fs'),
       path = require('path'),
       pug = require('pug'),
       compose_path = (...parts) => path.join(...parts),
-      build_path = compose_path(__dirname, "build", "html"),
+      build_path = compose_path(__dirname, 'build', 'html'),
       pugdir = compose_path(__dirname, 'src', 'pug', 'pages'),
       compile_pug = () => fs.readdir(pugdir, function (error, files) {
         if (error) {
@@ -23,11 +23,12 @@ const fs = require("fs"),
                   if (error) {
                     console.log(error);
                   } else {
+                    console.log('compiling', fname);
+
                     fs.write(
                       fd,
                       pug.compileFile(compose_path(pugdir, fname), {
-                        //"debug": true,
-                        "pretty": true,
+                        'pretty': true,
                       })(),
                       (error) => (error !== null) && console.log(error)
                     );
@@ -47,7 +48,7 @@ const fs = require("fs"),
                   if (error) {
                     console.log(error);
                   } else {
-                    console.log(a, "directory created");
+                    console.log(a, 'directory created');
                     if (b)
                       check_or_create(compose_path(a, b));
                     else
@@ -55,7 +56,7 @@ const fs = require("fs"),
                   }
                 });
               } else {
-                console.log(a, "exist");
+                console.log(a, 'exist');
                 if (b)
                   check_or_create(compose_path(a, b));
                 else
@@ -63,7 +64,7 @@ const fs = require("fs"),
               }
             });
           } else {
-            console.log(a, "exist");         
+            console.log(a, 'exist');         
             if (b)
               check_or_create(compose_path(a, b));
             else
@@ -71,4 +72,4 @@ const fs = require("fs"),
           }
         }));
 
-check_or_create(compose_path(__dirname, "build"), "html");
+check_or_create(compose_path(__dirname, 'build'), 'html');
