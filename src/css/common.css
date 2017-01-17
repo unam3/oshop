@@ -35,9 +35,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-  /*
   margin: auto;
-  */
   max-width: 1000px;
   font-size: 0.8em;
 }
