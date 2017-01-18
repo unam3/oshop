@@ -1,0 +1,9 @@
+.cost-filter__part {
+    margin: auto;
+}
+
+.cost-filter__input {
+  width: 5em;
+  margin-left: 0;
+  margin-right: 0;
+}

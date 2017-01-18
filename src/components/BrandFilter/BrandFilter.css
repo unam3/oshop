@@ -1,0 +1,9 @@
+.filter__brands {
+  flex-wrap: wrap;
+}
+
+.brand {
+  width: 124px;
+  margin-top: 0.5em;
+}
+

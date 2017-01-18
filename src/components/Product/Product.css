@@ -1,0 +1,19 @@
+.product-list-cost {
+  margin: auto;
+  margin-left: 0;
+}
+
+.add-to-cart, .product-in-cart {
+  /*
+  width: 85px;
+  height: 27px;
+  */
+  margin: 0.7em 0em;
+  padding: 8px 13px;
+}
+
+.product-in-cart {
+  background-color: #a0a0a0;
+  color: #ffffff;
+}
+
