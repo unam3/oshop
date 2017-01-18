@@ -1,5 +1,4 @@
-var path = require('path'),
-    ExtractTextPlugin = require("extract-text-webpack-plugin");
+var path = require('path');
 
 module.exports = {
     debug: true,
@@ -11,9 +10,6 @@ module.exports = {
 
         product_list: "./containers/ProductList/ProductList.js",
         order: "./containers/Order/Order.js",
-
-        // копирование css в build
-        //resourses: "./resources.js"
     },
     output: {
         path: path.join(__dirname, 'build', 'js'),
@@ -32,14 +28,10 @@ module.exports = {
           //https://github.com/webpack/extract-text-webpack-plugin/blob/webpack-1/README.md
           {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+            loader: "style-loader!css-loader",
           }
         ],
     },
-    plugins: [
-      new ExtractTextPlugin("../css/styles.css")
-      //new ExtractTextPlugin("[name].css")
-    ],
     resolve: {
         extensions: [
             "",

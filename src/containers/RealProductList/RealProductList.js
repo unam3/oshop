@@ -21,6 +21,7 @@ export default class ProductList extends React.Component {
   }
 
   render () {
+    require('../../common.css');
     require('./RealProductList.css');
 
     const {

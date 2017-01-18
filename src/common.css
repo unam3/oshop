@@ -1,0 +1,172 @@
+/* containers/App */
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+  border-color: #bcbcbc;
+  border-style: solid;
+  /*
+	font-size: 100%;
+  // ломается redux-dev-tools
+  color: #333333;
+  */
+	font-family: Arial, sans;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+  margin: auto;
+  max-width: 1000px;
+  font-size: 0.8em;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a {
+  color: #4078c0;
+}
+
+/* убираем управляющие элементы */
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+}
+
+/* основная часть */
+
+* {
+    box-sizing: border-box;
+}
+
+.flex-grid {
+    display: flex;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+}
+
+#main {
+  margin: 44px 0 0 0;
+}
+
+.title {
+  margin-bottom: 30px; 
+  font-size: 2.5em;
+}
+
+nav, .copyright {
+    border: 0;
+    margin: auto;
+    margin-bottom: 0;
+}
+
+.copyright {
+  margin-left: 0;
+}
+
+.logo {
+    width: 140px;
+    height: 60px;
+}
+
+footer {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  border-top-width: 1px;
+}
+
+/* order && product_list */
+
+.product {
+  margin: 0.3em 0;
+  max-width: 720px;
+}
+
+.product__cost {
+  font-size: 1.4em;
+}
+
+.blue-text {
+  color: #0000ff;
+}
+
+.link-wo-underline {
+  text-decoration: none;
+}
+
+.text-color {
+  color: #333333;
+}
+
+/* containers/Home */
+p {
+  margin-bottom: 1em;
+  font-size: 1.3em;
+  line-height: 1.5em;
+}
+
+ol {
+  margin: 1.2em;
+}
+
+li {
+  display: list-item;
+  margin-bottom: 0.3em;
+  list-style-type: disc;
+  font-size: 1.3em;
+}
+
+/* components/Nav */
+.nav {
+    border: 0;
+    margin: auto;
+    margin-bottom: 0;
+}
+
+.nav__link {
+    padding: 1.2em 1.2em 0 1.2em;
+    text-decoration: underline;
+}
+

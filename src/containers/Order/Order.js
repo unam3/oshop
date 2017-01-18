@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { connect, Provider } from 'react-redux';
-// const styles = require('../containers/Order/Order.css');
 import OrderWrapper from '../../components/OrderWrapper/OrderWrapper.js';
 import { createStore, combineReducers } from 'redux';
 import { ConnectedCart } from '../Cart/Cart.js';

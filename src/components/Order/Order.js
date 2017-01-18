@@ -13,7 +13,9 @@ export default ({
   /* eslint no-shadow: 0 */
   handleServerResponse
 }) => {
+  require('../../common.css');
   require('./Order.css');
+
   return (
   <div className="order flex-column">
     <h1 className="title">Оформление заказа</h1>
