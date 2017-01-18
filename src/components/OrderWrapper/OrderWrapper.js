@@ -15,7 +15,6 @@ export default function ({
   /* eslint no-shadow: 0 */
   handleServerResponse,
 }) {
-  require('./OrderWrapper.css');
   const redirect = path => setTimeout(
     () => window.location = path,
     6000
@@ -36,12 +35,14 @@ export default function ({
   return (serverResponse === 200) ?
     // можно редирект в корзину для оформления нового заказа
     <OrderInfo text="Заказ успешно отправлен" />
-    : (<Order
+    : (
+      <Order
         orderProducts={orderProducts}
         productId_quantity={productId_quantity}
         onQuantityChange={onQuantityChange}
         onDeleteFromOrder={onDeleteFromOrder}
         toggleProcessingOrderStatus={toggleProcessingOrderStatus}
         handleServerResponse={handleServerResponse}
-        />);
+        />
+    );
 }
